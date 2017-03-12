@@ -1,0 +1,9 @@
+Bundle-Name: products-data-api
+Bundle-SymbolicName: com.liferaystack.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	com.liferaystack.exception,\
+	com.liferaystack.model,\
+	com.liferaystack.service,\
+	com.liferaystack.service.persistence
+-includeresource: META-INF/service.xml=../products-data-service/service.xml
