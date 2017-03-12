@@ -23,6 +23,7 @@ import org.osgi.service.component.annotations.Component;
 	property = {
 		"com.liferay.portlet.display-category=liferaystack",
 		"com.liferay.portlet.instanceable=true",
+		"com.liferay.portlet.requires-namespaced-parameters=false",
 		"javax.portlet.display-name=Products Portlet",
 		"javax.portlet.init-param.template-path=/",
 		"javax.portlet.init-param.view-template=/view.jsp",
