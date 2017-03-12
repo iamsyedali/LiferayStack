@@ -1,6 +1,7 @@
 package com.liferaystack.products.portlet;
 
 import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
@@ -64,12 +65,19 @@ private static Log _log = LogFactoryUtil.getLog(ProductsPortlet.class);
 	
 	@ProcessAction(name="editProductAction")
 	public void editProductAction(ActionRequest actionRequest, ActionResponse actionResponse) throws IOException, PortletException {
-		_log.info("editProductAction....");
+		long productId = ParamUtil.getLong(actionRequest, "productId");
+		_log.info("editProductAction : productId : "+productId);
 	}
 	
 	@ProcessAction(name="deleteProductAction")
 	public void deleteProductAction(ActionRequest actionRequest, ActionResponse actionResponse) throws IOException, PortletException {
-		_log.info("deleteProductAction....");
+		long productId = ParamUtil.getLong(actionRequest, "productId");
+		try {
+			ProductLocalServiceUtil.deleteProduct(productId);
+		} catch (PortalException e) {
+			_log.error("PortalException : While deleting the Product : "+e.getMessage());
+		}
+		_log.info("editProductAction : productId : "+productId);
 	}
 	
 	@Override
