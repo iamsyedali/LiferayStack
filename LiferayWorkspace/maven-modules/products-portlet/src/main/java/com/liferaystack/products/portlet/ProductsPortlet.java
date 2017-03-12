@@ -67,6 +67,17 @@ private static Log _log = LogFactoryUtil.getLog(ProductsPortlet.class);
 	public void editProductAction(ActionRequest actionRequest, ActionResponse actionResponse) throws IOException, PortletException {
 		long productId = ParamUtil.getLong(actionRequest, "productId");
 		_log.info("editProductAction : productId : "+productId);
+		try {
+			Product product = ProductLocalServiceUtil.getProduct(productId);
+			String name = ParamUtil.getString(actionRequest, "name");
+			String description = ParamUtil.getString(actionRequest, "description");
+			product.setName(name);
+			product.setDescription(description);
+			product.setModifiedDate(new Date());
+			ProductLocalServiceUtil.updateProduct(product);
+		} catch (PortalException e) {
+			_log.error("PortalException : While fetching the Product : "+e.getMessage());
+		}
 	}
 	
 	@ProcessAction(name="deleteProductAction")
@@ -86,7 +97,22 @@ private static Log _log = LogFactoryUtil.getLog(ProductsPortlet.class);
 		_log.info("render....");
 		List<Product> products = ProductLocalServiceUtil.getProducts(-1, -1);
 		renderRequest.setAttribute("products",products);
+		String mvcPath = ParamUtil.getString(renderRequest, "mvcPath");
 		//_log.info("products : products "+products.size());
+		if(mvcPath .equals("/edit-product.jsp")){
+			_log.info("/edit-product.jsp");
+			long productId = ParamUtil.getLong(renderRequest, "productId");
+			try{
+				renderRequest.setAttribute("product", ProductLocalServiceUtil.getProduct(productId));
+			}
+			catch (PortalException e) {
+				_log.error("PortalException : While fetching the Product : "+e.getMessage());
+			}
+			
+		}else
+		{
+			_log.info("not /edit-product.jsp");
+		}
 		super.render(renderRequest, renderResponse);
 	}
 }
