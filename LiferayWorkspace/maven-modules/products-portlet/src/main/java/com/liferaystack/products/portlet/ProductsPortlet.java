@@ -109,9 +109,6 @@ private static Log _log = LogFactoryUtil.getLog(ProductsPortlet.class);
 				_log.error("PortalException : While fetching the Product : "+e.getMessage());
 			}
 			
-		}else
-		{
-			_log.info("not /edit-product.jsp");
 		}
 		super.render(renderRequest, renderResponse);
 	}
