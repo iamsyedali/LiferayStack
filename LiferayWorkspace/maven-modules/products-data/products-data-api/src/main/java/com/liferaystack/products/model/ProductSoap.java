@@ -39,6 +39,7 @@ public class ProductSoap implements Serializable {
 		soapModel.setName(model.getName());
 		soapModel.setDescription(model.getDescription());
 		soapModel.setUserId(model.getUserId());
+		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setGroupId(model.getGroupId());
@@ -139,6 +140,14 @@ public class ProductSoap implements Serializable {
 		_userId = userId;
 	}
 
+	public String getUserName() {
+		return _userName;
+	}
+
+	public void setUserName(String userName) {
+		_userName = userName;
+	}
+
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -208,6 +217,7 @@ public class ProductSoap implements Serializable {
 	private String _name;
 	private String _description;
 	private long _userId;
+	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _groupId;

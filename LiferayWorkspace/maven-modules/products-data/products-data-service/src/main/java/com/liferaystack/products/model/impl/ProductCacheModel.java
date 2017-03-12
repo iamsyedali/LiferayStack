@@ -65,7 +65,7 @@ public class ProductCacheModel implements CacheModel<Product>, Externalizable {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(27);
+		StringBundler sb = new StringBundler(29);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -77,6 +77,8 @@ public class ProductCacheModel implements CacheModel<Product>, Externalizable {
 		sb.append(description);
 		sb.append(", userId=");
 		sb.append(userId);
+		sb.append(", userName=");
+		sb.append(userName);
 		sb.append(", createDate=");
 		sb.append(createDate);
 		sb.append(", modifiedDate=");
@@ -127,6 +129,13 @@ public class ProductCacheModel implements CacheModel<Product>, Externalizable {
 
 		productImpl.setUserId(userId);
 
+		if (userName == null) {
+			productImpl.setUserName(StringPool.BLANK);
+		}
+		else {
+			productImpl.setUserName(userName);
+		}
+
 		if (createDate == Long.MIN_VALUE) {
 			productImpl.setCreateDate(null);
 		}
@@ -174,6 +183,7 @@ public class ProductCacheModel implements CacheModel<Product>, Externalizable {
 		description = objectInput.readUTF();
 
 		userId = objectInput.readLong();
+		userName = objectInput.readUTF();
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
 
@@ -215,6 +225,14 @@ public class ProductCacheModel implements CacheModel<Product>, Externalizable {
 		}
 
 		objectOutput.writeLong(userId);
+
+		if (userName == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(userName);
+		}
+
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
 
@@ -241,6 +259,7 @@ public class ProductCacheModel implements CacheModel<Product>, Externalizable {
 	public String name;
 	public String description;
 	public long userId;
+	public String userName;
 	public long createDate;
 	public long modifiedDate;
 	public long groupId;

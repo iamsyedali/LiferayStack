@@ -5,70 +5,77 @@ import java.util.Locale;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import com.liferay.asset.kernel.model.BaseJSPAssetRenderer;
+import com.liferay.portal.kernel.util.ResourceBundleLoader;
 import com.liferaystack.products.model.Product;
 
-public class ProductAssetRenderer<T> extends BaseJSPAssetRenderer<Product> {
+public class ProductAssetRenderer extends BaseJSPAssetRenderer<Product> {
 
+	private final Product _product;
+	private final ResourceBundleLoader _resourceBundleLoader;
+	
+	
+	public ProductAssetRenderer(Product product, ResourceBundleLoader resourceBundleLoader) {
+		_product = product;
+		_resourceBundleLoader = resourceBundleLoader;
+	 }
+	
 	@Override
 	public Product getAssetObject() {
-		// TODO Auto-generated method stub
-		return null;
+		return _product;
 	}
 
 	@Override
 	public long getGroupId() {
-		// TODO Auto-generated method stub
-		return 0;
+		return _product.getGroupId();
 	}
 
 	@Override
 	public long getUserId() {
-		// TODO Auto-generated method stub
-		return 0;
+		return _product.getUserId();
 	}
 
 	@Override
 	public String getUserName() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public String getUuid() {
-		// TODO Auto-generated method stub
-		return null;
+		return _product.getUuid();
 	}
 
 	@Override
 	public String getClassName() {
-		// TODO Auto-generated method stub
-		return null;
+		return Product.class.getName();
 	}
 
 	@Override
 	public long getClassPK() {
-		// TODO Auto-generated method stub
-		return 0;
+		return _product.getProductId();
 	}
 
 	@Override
 	public String getSummary(PortletRequest arg0, PortletResponse arg1) {
-		// TODO Auto-generated method stub
-		return null;
+		return "Summary : "+_product.getName();
 	}
 
 	@Override
 	public String getTitle(Locale arg0) {
-		// TODO Auto-generated method stub
-		return null;
+		return "Name : "+_product.getName();
 	}
 
 	@Override
 	public String getJspPath(HttpServletRequest arg0, String arg1) {
-		// TODO Auto-generated method stub
-		return null;
+		return "/leave/product-details.jsp";
 	}
+	
+	@Override
+	 public boolean include(HttpServletRequest request, HttpServletResponse response, String template) throws Exception {
+	    request.setAttribute("product", _product);
+	    return super.include(request, response, template);
+	 }
 
 }

@@ -79,6 +79,7 @@ public class ProductModelImpl extends BaseModelImpl<Product>
 			{ "name", Types.VARCHAR },
 			{ "description", Types.VARCHAR },
 			{ "userId", Types.BIGINT },
+			{ "userName", Types.VARCHAR },
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "groupId", Types.BIGINT },
@@ -96,6 +97,7 @@ public class ProductModelImpl extends BaseModelImpl<Product>
 		TABLE_COLUMNS_MAP.put("name", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("description", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("userId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("createDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("groupId", Types.BIGINT);
@@ -106,7 +108,7 @@ public class ProductModelImpl extends BaseModelImpl<Product>
 		TABLE_COLUMNS_MAP.put("statusDate", Types.TIMESTAMP);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table LS_Product (uuid_ VARCHAR(75) null,productId LONG not null primary key,name VARCHAR(75) null,description VARCHAR(75) null,userId LONG,createDate DATE null,modifiedDate DATE null,groupId LONG,companyId LONG,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table LS_Product (uuid_ VARCHAR(75) null,productId LONG not null primary key,name VARCHAR(75) null,description VARCHAR(75) null,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,groupId LONG,companyId LONG,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table LS_Product";
 	public static final String ORDER_BY_JPQL = " ORDER BY product.productId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY LS_Product.productId ASC";
@@ -146,6 +148,7 @@ public class ProductModelImpl extends BaseModelImpl<Product>
 		model.setName(soapModel.getName());
 		model.setDescription(soapModel.getDescription());
 		model.setUserId(soapModel.getUserId());
+		model.setUserName(soapModel.getUserName());
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setGroupId(soapModel.getGroupId());
@@ -223,6 +226,7 @@ public class ProductModelImpl extends BaseModelImpl<Product>
 		attributes.put("name", getName());
 		attributes.put("description", getDescription());
 		attributes.put("userId", getUserId());
+		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("groupId", getGroupId());
@@ -268,6 +272,12 @@ public class ProductModelImpl extends BaseModelImpl<Product>
 
 		if (userId != null) {
 			setUserId(userId);
+		}
+
+		String userName = (String)attributes.get("userName");
+
+		if (userName != null) {
+			setUserName(userName);
 		}
 
 		Date createDate = (Date)attributes.get("createDate");
@@ -411,6 +421,22 @@ public class ProductModelImpl extends BaseModelImpl<Product>
 
 	@Override
 	public void setUserUuid(String userUuid) {
+	}
+
+	@JSON
+	@Override
+	public String getUserName() {
+		if (_userName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _userName;
+		}
+	}
+
+	@Override
+	public void setUserName(String userName) {
+		_userName = userName;
 	}
 
 	@JSON
@@ -686,6 +712,7 @@ public class ProductModelImpl extends BaseModelImpl<Product>
 		productImpl.setName(getName());
 		productImpl.setDescription(getDescription());
 		productImpl.setUserId(getUserId());
+		productImpl.setUserName(getUserName());
 		productImpl.setCreateDate(getCreateDate());
 		productImpl.setModifiedDate(getModifiedDate());
 		productImpl.setGroupId(getGroupId());
@@ -807,6 +834,14 @@ public class ProductModelImpl extends BaseModelImpl<Product>
 
 		productCacheModel.userId = getUserId();
 
+		productCacheModel.userName = getUserName();
+
+		String userName = productCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
+			productCacheModel.userName = null;
+		}
+
 		Date createDate = getCreateDate();
 
 		if (createDate != null) {
@@ -855,7 +890,7 @@ public class ProductModelImpl extends BaseModelImpl<Product>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(27);
+		StringBundler sb = new StringBundler(29);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -867,6 +902,8 @@ public class ProductModelImpl extends BaseModelImpl<Product>
 		sb.append(getDescription());
 		sb.append(", userId=");
 		sb.append(getUserId());
+		sb.append(", userName=");
+		sb.append(getUserName());
 		sb.append(", createDate=");
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
@@ -890,7 +927,7 @@ public class ProductModelImpl extends BaseModelImpl<Product>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(43);
+		StringBundler sb = new StringBundler(46);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferaystack.products.model.Product");
@@ -915,6 +952,10 @@ public class ProductModelImpl extends BaseModelImpl<Product>
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
 		sb.append(getUserId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userName</column-name><column-value><![CDATA[");
+		sb.append(getUserName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>createDate</column-name><column-value><![CDATA[");
@@ -964,6 +1005,7 @@ public class ProductModelImpl extends BaseModelImpl<Product>
 	private String _name;
 	private String _description;
 	private long _userId;
+	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private boolean _setModifiedDate;

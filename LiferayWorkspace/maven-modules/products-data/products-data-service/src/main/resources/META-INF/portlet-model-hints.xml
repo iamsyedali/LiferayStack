@@ -7,6 +7,7 @@
 		<field name="name" type="String" />
 		<field name="description" type="String" />
 		<field name="userId" type="long" />
+		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="groupId" type="long" />

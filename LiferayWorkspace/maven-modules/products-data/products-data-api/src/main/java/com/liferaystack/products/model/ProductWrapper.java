@@ -64,6 +64,7 @@ public class ProductWrapper implements Product, ModelWrapper<Product> {
 		attributes.put("name", getName());
 		attributes.put("description", getDescription());
 		attributes.put("userId", getUserId());
+		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("groupId", getGroupId());
@@ -106,6 +107,12 @@ public class ProductWrapper implements Product, ModelWrapper<Product> {
 
 		if (userId != null) {
 			setUserId(userId);
+		}
+
+		String userName = (String)attributes.get("userName");
+
+		if (userName != null) {
+			setUserName(userName);
 		}
 
 		Date createDate = (Date)attributes.get("createDate");
@@ -340,6 +347,16 @@ public class ProductWrapper implements Product, ModelWrapper<Product> {
 	@Override
 	public java.lang.String getStatusByUserUuid() {
 		return _product.getStatusByUserUuid();
+	}
+
+	/**
+	* Returns the user name of this product.
+	*
+	* @return the user name of this product
+	*/
+	@Override
+	public java.lang.String getUserName() {
+		return _product.getUserName();
 	}
 
 	/**
@@ -636,6 +653,16 @@ public class ProductWrapper implements Product, ModelWrapper<Product> {
 	@Override
 	public void setUserId(long userId) {
 		_product.setUserId(userId);
+	}
+
+	/**
+	* Sets the user name of this product.
+	*
+	* @param userName the user name of this product
+	*/
+	@Override
+	public void setUserName(java.lang.String userName) {
+		_product.setUserName(userName);
 	}
 
 	/**

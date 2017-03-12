@@ -4,6 +4,7 @@ create table LS_Product (
 	name VARCHAR(75) null,
 	description VARCHAR(75) null,
 	userId LONG,
+	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
 	groupId LONG,

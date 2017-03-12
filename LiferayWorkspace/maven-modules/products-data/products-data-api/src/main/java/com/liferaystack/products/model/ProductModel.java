@@ -21,8 +21,9 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.model.BaseModel;
 import com.liferay.portal.kernel.model.CacheModel;
+import com.liferay.portal.kernel.model.GroupedModel;
 import com.liferay.portal.kernel.model.ShardedModel;
-import com.liferay.portal.kernel.model.StagedModel;
+import com.liferay.portal.kernel.model.StagedAuditedModel;
 import com.liferay.portal.kernel.model.WorkflowedModel;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -44,8 +45,8 @@ import java.util.Date;
  * @generated
  */
 @ProviderType
-public interface ProductModel extends BaseModel<Product>, ShardedModel,
-	StagedModel, WorkflowedModel {
+public interface ProductModel extends BaseModel<Product>, GroupedModel,
+	ShardedModel, StagedAuditedModel, WorkflowedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -132,6 +133,7 @@ public interface ProductModel extends BaseModel<Product>, ShardedModel,
 	 *
 	 * @return the user ID of this product
 	 */
+	@Override
 	public long getUserId();
 
 	/**
@@ -139,6 +141,7 @@ public interface ProductModel extends BaseModel<Product>, ShardedModel,
 	 *
 	 * @param userId the user ID of this product
 	 */
+	@Override
 	public void setUserId(long userId);
 
 	/**
@@ -146,6 +149,7 @@ public interface ProductModel extends BaseModel<Product>, ShardedModel,
 	 *
 	 * @return the user uuid of this product
 	 */
+	@Override
 	public String getUserUuid();
 
 	/**
@@ -153,7 +157,25 @@ public interface ProductModel extends BaseModel<Product>, ShardedModel,
 	 *
 	 * @param userUuid the user uuid of this product
 	 */
+	@Override
 	public void setUserUuid(String userUuid);
+
+	/**
+	 * Returns the user name of this product.
+	 *
+	 * @return the user name of this product
+	 */
+	@AutoEscape
+	@Override
+	public String getUserName();
+
+	/**
+	 * Sets the user name of this product.
+	 *
+	 * @param userName the user name of this product
+	 */
+	@Override
+	public void setUserName(String userName);
 
 	/**
 	 * Returns the create date of this product.
@@ -192,6 +214,7 @@ public interface ProductModel extends BaseModel<Product>, ShardedModel,
 	 *
 	 * @return the group ID of this product
 	 */
+	@Override
 	public long getGroupId();
 
 	/**
@@ -199,6 +222,7 @@ public interface ProductModel extends BaseModel<Product>, ShardedModel,
 	 *
 	 * @param groupId the group ID of this product
 	 */
+	@Override
 	public void setGroupId(long groupId);
 
 	/**

@@ -2403,6 +2403,7 @@ public class ProductPersistenceImpl extends BasePersistenceImpl<Product>
 		productImpl.setName(product.getName());
 		productImpl.setDescription(product.getDescription());
 		productImpl.setUserId(product.getUserId());
+		productImpl.setUserName(product.getUserName());
 		productImpl.setCreateDate(product.getCreateDate());
 		productImpl.setModifiedDate(product.getModifiedDate());
 		productImpl.setGroupId(product.getGroupId());
