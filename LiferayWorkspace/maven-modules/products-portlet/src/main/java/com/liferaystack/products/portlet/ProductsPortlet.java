@@ -43,17 +43,10 @@ public class ProductsPortlet extends MVCPortlet {
 private static Log _log = LogFactoryUtil.getLog(ProductsPortlet.class);
 	
 	@ProcessAction(name="addProductAction")
-	public void addProductAction(ActionRequest actionRequest, ActionResponse actionResponse)
-			throws IOException, PortletException {
+	public void addProductAction(ActionRequest actionRequest, ActionResponse actionResponse) throws IOException, PortletException {
 		_log.info("addProductAction....");
-		
 		ThemeDisplay themeDisplay = (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
-
 		long groupId = themeDisplay.getScopeGroupId();
-		
-
-		
-
 		String name = ParamUtil.getString(actionRequest, "name");
 		String description = ParamUtil.getString(actionRequest, "description");
 		Product product = ProductLocalServiceUtil.createProduct(CounterLocalServiceUtil.increment(Product.class.getName()));
@@ -69,11 +62,22 @@ private static Log _log = LogFactoryUtil.getLog(ProductsPortlet.class);
 		_log.info("addProductAction completed...");
 	}
 	
+	@ProcessAction(name="editProductAction")
+	public void editProductAction(ActionRequest actionRequest, ActionResponse actionResponse) throws IOException, PortletException {
+		_log.info("editProductAction....");
+	}
+	
+	@ProcessAction(name="deleteProductAction")
+	public void deleteProductAction(ActionRequest actionRequest, ActionResponse actionResponse) throws IOException, PortletException {
+		_log.info("deleteProductAction....");
+	}
+	
 	@Override
 	public void render(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
 		_log.info("render....");
-		List<Product> products = ProductLocalServiceUtil.getProducts(-1, -1); 
+		List<Product> products = ProductLocalServiceUtil.getProducts(-1, -1);
+		renderRequest.setAttribute("products",products);
 		//_log.info("products : products "+products.size());
 		super.render(renderRequest, renderResponse);
 	}

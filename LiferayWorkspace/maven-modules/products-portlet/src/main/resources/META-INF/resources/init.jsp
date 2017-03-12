@@ -10,3 +10,7 @@
 <liferay-theme:defineObjects />
 
 <portlet:defineObjects />
+
+<%@page import="com.liferay.portal.kernel.util.WebKeys"%>
+<%@page import="com.liferay.taglib.search.ResultRow"%>
+<%@page import="com.liferaystack.products.model.Product"%>
