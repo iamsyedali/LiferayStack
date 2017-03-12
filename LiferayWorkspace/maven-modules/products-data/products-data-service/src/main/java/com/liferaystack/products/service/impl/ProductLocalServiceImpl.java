@@ -16,6 +16,9 @@ package com.liferaystack.products.service.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
+import java.util.List;
+
+import com.liferaystack.products.model.Product;
 import com.liferaystack.products.service.base.ProductLocalServiceBaseImpl;
 
 /**
@@ -39,4 +42,7 @@ public class ProductLocalServiceImpl extends ProductLocalServiceBaseImpl {
 	 *
 	 * Never reference this class directly. Always use {@link com.liferaystack.products.service.ProductLocalServiceUtil} to access the product local service.
 	 */
+	public List<Product> findBystatusAndGroupId(long groupId, int status) {
+		return productPersistence.findBystatusAndGroupId(groupId, status);
+	}
 }

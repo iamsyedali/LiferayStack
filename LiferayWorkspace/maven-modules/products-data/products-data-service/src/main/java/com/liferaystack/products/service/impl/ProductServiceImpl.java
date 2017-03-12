@@ -16,6 +16,9 @@ package com.liferaystack.products.service.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
+import java.util.List;
+
+import com.liferaystack.products.model.Product;
 import com.liferaystack.products.service.base.ProductServiceBaseImpl;
 
 /**
@@ -39,4 +42,8 @@ public class ProductServiceImpl extends ProductServiceBaseImpl {
 	 *
 	 * Never reference this class directly. Always use {@link com.liferaystack.products.service.ProductServiceUtil} to access the product remote service.
 	 */
+	
+	public List<Product> findBystatusAndGroupId(long groupId, int status) {
+		return productPersistence.findBystatusAndGroupId(groupId, status);
+	}
 }

@@ -43,6 +43,12 @@ public class ProductServiceWrapper implements ProductService,
 	}
 
 	@Override
+	public java.util.List<com.liferaystack.products.model.Product> findBystatusAndGroupId(
+		long groupId, int status) {
+		return _productService.findBystatusAndGroupId(groupId, status);
+	}
+
+	@Override
 	public ProductService getWrappedService() {
 		return _productService;
 	}

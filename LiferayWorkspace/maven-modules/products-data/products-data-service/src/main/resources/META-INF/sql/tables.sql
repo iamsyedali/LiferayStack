@@ -7,5 +7,9 @@ create table LS_Product (
 	createDate DATE null,
 	modifiedDate DATE null,
 	groupId LONG,
-	companyId LONG
+	companyId LONG,
+	status INTEGER,
+	statusByUserId LONG,
+	statusByUserName VARCHAR(75) null,
+	statusDate DATE null
 );

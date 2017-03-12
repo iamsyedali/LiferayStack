@@ -25,6 +25,10 @@ import com.liferay.portal.kernel.spring.osgi.OSGiBeanProperties;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Transactional;
 
+import com.liferaystack.products.model.Product;
+
+import java.util.List;
+
 /**
  * Provides the remote service interface for Product. Methods of this
  * service are expected to have security checks based on the propagated JAAS
@@ -56,4 +60,6 @@ public interface ProductService extends BaseService {
 	* @return the OSGi service identifier
 	*/
 	public java.lang.String getOSGiServiceIdentifier();
+
+	public List<Product> findBystatusAndGroupId(long groupId, int status);
 }

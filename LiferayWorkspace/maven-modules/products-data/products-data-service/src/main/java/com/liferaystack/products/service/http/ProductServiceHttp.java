@@ -16,12 +16,21 @@ package com.liferaystack.products.service.http;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.security.auth.HttpPrincipal;
+import com.liferay.portal.kernel.service.http.TunnelUtil;
+import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodKey;
+
+import com.liferaystack.products.service.ProductServiceUtil;
+
 /**
  * Provides the HTTP utility for the
- * {@link com.liferaystack.products.service.ProductServiceUtil} service utility. The
+ * {@link ProductServiceUtil} service utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it requires an additional
- * {@link com.liferay.portal.kernel.security.auth.HttpPrincipal} parameter.
+ * {@link HttpPrincipal} parameter.
  *
  * <p>
  * The benefits of using the HTTP utility is that it is fast and allows for
@@ -40,10 +49,42 @@ import aQute.bnd.annotation.ProviderType;
  *
  * @author Syed Ali
  * @see ProductServiceSoap
- * @see com.liferay.portal.kernel.security.auth.HttpPrincipal
- * @see com.liferaystack.products.service.ProductServiceUtil
+ * @see HttpPrincipal
+ * @see ProductServiceUtil
  * @generated
  */
 @ProviderType
 public class ProductServiceHttp {
+	public static java.util.List<com.liferaystack.products.model.Product> findBystatusAndGroupId(
+		HttpPrincipal httpPrincipal, long groupId, int status) {
+		try {
+			MethodKey methodKey = new MethodKey(ProductServiceUtil.class,
+					"findBystatusAndGroupId",
+					_findBystatusAndGroupIdParameterTypes0);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					status);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (java.util.List<com.liferaystack.products.model.Product>)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(ProductServiceHttp.class);
+	private static final Class<?>[] _findBystatusAndGroupIdParameterTypes0 = new Class[] {
+			long.class, int.class
+		};
 }

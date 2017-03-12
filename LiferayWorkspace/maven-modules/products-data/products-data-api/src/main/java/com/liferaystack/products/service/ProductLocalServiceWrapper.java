@@ -249,6 +249,12 @@ public class ProductLocalServiceWrapper implements ProductLocalService,
 			orderByComparator);
 	}
 
+	@Override
+	public java.util.List<com.liferaystack.products.model.Product> findBystatusAndGroupId(
+		long groupId, int status) {
+		return _productLocalService.findBystatusAndGroupId(groupId, status);
+	}
+
 	/**
 	* Returns a range of all the products.
 	*

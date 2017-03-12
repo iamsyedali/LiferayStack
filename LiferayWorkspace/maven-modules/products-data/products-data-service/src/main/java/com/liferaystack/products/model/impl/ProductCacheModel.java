@@ -65,7 +65,7 @@ public class ProductCacheModel implements CacheModel<Product>, Externalizable {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(27);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -85,6 +85,14 @@ public class ProductCacheModel implements CacheModel<Product>, Externalizable {
 		sb.append(groupId);
 		sb.append(", companyId=");
 		sb.append(companyId);
+		sb.append(", status=");
+		sb.append(status);
+		sb.append(", statusByUserId=");
+		sb.append(statusByUserId);
+		sb.append(", statusByUserName=");
+		sb.append(statusByUserName);
+		sb.append(", statusDate=");
+		sb.append(statusDate);
 		sb.append("}");
 
 		return sb.toString();
@@ -135,6 +143,22 @@ public class ProductCacheModel implements CacheModel<Product>, Externalizable {
 
 		productImpl.setGroupId(groupId);
 		productImpl.setCompanyId(companyId);
+		productImpl.setStatus(status);
+		productImpl.setStatusByUserId(statusByUserId);
+
+		if (statusByUserName == null) {
+			productImpl.setStatusByUserName(StringPool.BLANK);
+		}
+		else {
+			productImpl.setStatusByUserName(statusByUserName);
+		}
+
+		if (statusDate == Long.MIN_VALUE) {
+			productImpl.setStatusDate(null);
+		}
+		else {
+			productImpl.setStatusDate(new Date(statusDate));
+		}
 
 		productImpl.resetOriginalValues();
 
@@ -156,6 +180,12 @@ public class ProductCacheModel implements CacheModel<Product>, Externalizable {
 		groupId = objectInput.readLong();
 
 		companyId = objectInput.readLong();
+
+		status = objectInput.readInt();
+
+		statusByUserId = objectInput.readLong();
+		statusByUserName = objectInput.readUTF();
+		statusDate = objectInput.readLong();
 	}
 
 	@Override
@@ -191,6 +221,19 @@ public class ProductCacheModel implements CacheModel<Product>, Externalizable {
 		objectOutput.writeLong(groupId);
 
 		objectOutput.writeLong(companyId);
+
+		objectOutput.writeInt(status);
+
+		objectOutput.writeLong(statusByUserId);
+
+		if (statusByUserName == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(statusByUserName);
+		}
+
+		objectOutput.writeLong(statusDate);
 	}
 
 	public String uuid;
@@ -202,4 +245,8 @@ public class ProductCacheModel implements CacheModel<Product>, Externalizable {
 	public long modifiedDate;
 	public long groupId;
 	public long companyId;
+	public int status;
+	public long statusByUserId;
+	public String statusByUserName;
+	public long statusDate;
 }

@@ -222,6 +222,8 @@ public interface ProductLocalService extends BaseLocalService,
 	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end, OrderByComparator<T> orderByComparator);
 
+	public List<Product> findBystatusAndGroupId(long groupId, int status);
+
 	/**
 	* Returns a range of all the products.
 	*

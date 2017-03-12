@@ -1469,6 +1469,551 @@ public class ProductPersistenceImpl extends BasePersistenceImpl<Product>
 	private static final String _FINDER_COLUMN_UUID_C_UUID_2 = "product.uuid = ? AND ";
 	private static final String _FINDER_COLUMN_UUID_C_UUID_3 = "(product.uuid IS NULL OR product.uuid = '') AND ";
 	private static final String _FINDER_COLUMN_UUID_C_COMPANYID_2 = "product.companyId = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_STATUSANDGROUPID =
+		new FinderPath(ProductModelImpl.ENTITY_CACHE_ENABLED,
+			ProductModelImpl.FINDER_CACHE_ENABLED, ProductImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findBystatusAndGroupId",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_STATUSANDGROUPID =
+		new FinderPath(ProductModelImpl.ENTITY_CACHE_ENABLED,
+			ProductModelImpl.FINDER_CACHE_ENABLED, ProductImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"findBystatusAndGroupId",
+			new String[] { Long.class.getName(), Integer.class.getName() },
+			ProductModelImpl.GROUPID_COLUMN_BITMASK |
+			ProductModelImpl.STATUS_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_STATUSANDGROUPID = new FinderPath(ProductModelImpl.ENTITY_CACHE_ENABLED,
+			ProductModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countBystatusAndGroupId",
+			new String[] { Long.class.getName(), Integer.class.getName() });
+
+	/**
+	 * Returns all the products where groupId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param status the status
+	 * @return the matching products
+	 */
+	@Override
+	public List<Product> findBystatusAndGroupId(long groupId, int status) {
+		return findBystatusAndGroupId(groupId, status, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the products where groupId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ProductModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param status the status
+	 * @param start the lower bound of the range of products
+	 * @param end the upper bound of the range of products (not inclusive)
+	 * @return the range of matching products
+	 */
+	@Override
+	public List<Product> findBystatusAndGroupId(long groupId, int status,
+		int start, int end) {
+		return findBystatusAndGroupId(groupId, status, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the products where groupId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ProductModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param status the status
+	 * @param start the lower bound of the range of products
+	 * @param end the upper bound of the range of products (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching products
+	 */
+	@Override
+	public List<Product> findBystatusAndGroupId(long groupId, int status,
+		int start, int end, OrderByComparator<Product> orderByComparator) {
+		return findBystatusAndGroupId(groupId, status, start, end,
+			orderByComparator, true);
+	}
+
+	/**
+	 * Returns an ordered range of all the products where groupId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ProductModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param status the status
+	 * @param start the lower bound of the range of products
+	 * @param end the upper bound of the range of products (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the ordered range of matching products
+	 */
+	@Override
+	public List<Product> findBystatusAndGroupId(long groupId, int status,
+		int start, int end, OrderByComparator<Product> orderByComparator,
+		boolean retrieveFromCache) {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_STATUSANDGROUPID;
+			finderArgs = new Object[] { groupId, status };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_STATUSANDGROUPID;
+			finderArgs = new Object[] {
+					groupId, status,
+					
+					start, end, orderByComparator
+				};
+		}
+
+		List<Product> list = null;
+
+		if (retrieveFromCache) {
+			list = (List<Product>)finderCache.getResult(finderPath, finderArgs,
+					this);
+
+			if ((list != null) && !list.isEmpty()) {
+				for (Product product : list) {
+					if ((groupId != product.getGroupId()) ||
+							(status != product.getStatus())) {
+						list = null;
+
+						break;
+					}
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 2));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_SQL_SELECT_PRODUCT_WHERE);
+
+			query.append(_FINDER_COLUMN_STATUSANDGROUPID_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_STATUSANDGROUPID_STATUS_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(ProductModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(status);
+
+				if (!pagination) {
+					list = (List<Product>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
+					Collections.sort(list);
+
+					list = Collections.unmodifiableList(list);
+				}
+				else {
+					list = (List<Product>)QueryUtil.list(q, getDialect(),
+							start, end);
+				}
+
+				cacheResult(list);
+
+				finderCache.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first product in the ordered set where groupId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching product
+	 * @throws NoSuchProductException if a matching product could not be found
+	 */
+	@Override
+	public Product findBystatusAndGroupId_First(long groupId, int status,
+		OrderByComparator<Product> orderByComparator)
+		throws NoSuchProductException {
+		Product product = fetchBystatusAndGroupId_First(groupId, status,
+				orderByComparator);
+
+		if (product != null) {
+			return product;
+		}
+
+		StringBundler msg = new StringBundler(6);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("groupId=");
+		msg.append(groupId);
+
+		msg.append(", status=");
+		msg.append(status);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchProductException(msg.toString());
+	}
+
+	/**
+	 * Returns the first product in the ordered set where groupId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching product, or <code>null</code> if a matching product could not be found
+	 */
+	@Override
+	public Product fetchBystatusAndGroupId_First(long groupId, int status,
+		OrderByComparator<Product> orderByComparator) {
+		List<Product> list = findBystatusAndGroupId(groupId, status, 0, 1,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last product in the ordered set where groupId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching product
+	 * @throws NoSuchProductException if a matching product could not be found
+	 */
+	@Override
+	public Product findBystatusAndGroupId_Last(long groupId, int status,
+		OrderByComparator<Product> orderByComparator)
+		throws NoSuchProductException {
+		Product product = fetchBystatusAndGroupId_Last(groupId, status,
+				orderByComparator);
+
+		if (product != null) {
+			return product;
+		}
+
+		StringBundler msg = new StringBundler(6);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("groupId=");
+		msg.append(groupId);
+
+		msg.append(", status=");
+		msg.append(status);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchProductException(msg.toString());
+	}
+
+	/**
+	 * Returns the last product in the ordered set where groupId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching product, or <code>null</code> if a matching product could not be found
+	 */
+	@Override
+	public Product fetchBystatusAndGroupId_Last(long groupId, int status,
+		OrderByComparator<Product> orderByComparator) {
+		int count = countBystatusAndGroupId(groupId, status);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<Product> list = findBystatusAndGroupId(groupId, status, count - 1,
+				count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the products before and after the current product in the ordered set where groupId = &#63; and status = &#63;.
+	 *
+	 * @param productId the primary key of the current product
+	 * @param groupId the group ID
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next product
+	 * @throws NoSuchProductException if a product with the primary key could not be found
+	 */
+	@Override
+	public Product[] findBystatusAndGroupId_PrevAndNext(long productId,
+		long groupId, int status, OrderByComparator<Product> orderByComparator)
+		throws NoSuchProductException {
+		Product product = findByPrimaryKey(productId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			Product[] array = new ProductImpl[3];
+
+			array[0] = getBystatusAndGroupId_PrevAndNext(session, product,
+					groupId, status, orderByComparator, true);
+
+			array[1] = product;
+
+			array[2] = getBystatusAndGroupId_PrevAndNext(session, product,
+					groupId, status, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected Product getBystatusAndGroupId_PrevAndNext(Session session,
+		Product product, long groupId, int status,
+		OrderByComparator<Product> orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(5 +
+					(orderByComparator.getOrderByConditionFields().length * 3) +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(4);
+		}
+
+		query.append(_SQL_SELECT_PRODUCT_WHERE);
+
+		query.append(_FINDER_COLUMN_STATUSANDGROUPID_GROUPID_2);
+
+		query.append(_FINDER_COLUMN_STATUSANDGROUPID_STATUS_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(ProductModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(groupId);
+
+		qPos.add(status);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(product);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<Product> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the products where groupId = &#63; and status = &#63; from the database.
+	 *
+	 * @param groupId the group ID
+	 * @param status the status
+	 */
+	@Override
+	public void removeBystatusAndGroupId(long groupId, int status) {
+		for (Product product : findBystatusAndGroupId(groupId, status,
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+			remove(product);
+		}
+	}
+
+	/**
+	 * Returns the number of products where groupId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param status the status
+	 * @return the number of matching products
+	 */
+	@Override
+	public int countBystatusAndGroupId(long groupId, int status) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_STATUSANDGROUPID;
+
+		Object[] finderArgs = new Object[] { groupId, status };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_PRODUCT_WHERE);
+
+			query.append(_FINDER_COLUMN_STATUSANDGROUPID_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_STATUSANDGROUPID_STATUS_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(status);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_STATUSANDGROUPID_GROUPID_2 = "product.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_STATUSANDGROUPID_STATUS_2 = "product.status = ?";
 
 	public ProductPersistenceImpl() {
 		setModelClass(Product.class);
@@ -1807,6 +2352,29 @@ public class ProductPersistenceImpl extends BasePersistenceImpl<Product>
 				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UUID_C,
 					args);
 			}
+
+			if ((productModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_STATUSANDGROUPID.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						productModelImpl.getOriginalGroupId(),
+						productModelImpl.getOriginalStatus()
+					};
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_STATUSANDGROUPID,
+					args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_STATUSANDGROUPID,
+					args);
+
+				args = new Object[] {
+						productModelImpl.getGroupId(),
+						productModelImpl.getStatus()
+					};
+
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_STATUSANDGROUPID,
+					args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_STATUSANDGROUPID,
+					args);
+			}
 		}
 
 		entityCache.putResult(ProductModelImpl.ENTITY_CACHE_ENABLED,
@@ -1839,6 +2407,10 @@ public class ProductPersistenceImpl extends BasePersistenceImpl<Product>
 		productImpl.setModifiedDate(product.getModifiedDate());
 		productImpl.setGroupId(product.getGroupId());
 		productImpl.setCompanyId(product.getCompanyId());
+		productImpl.setStatus(product.getStatus());
+		productImpl.setStatusByUserId(product.getStatusByUserId());
+		productImpl.setStatusByUserName(product.getStatusByUserName());
+		productImpl.setStatusDate(product.getStatusDate());
 
 		return productImpl;
 	}

@@ -51,6 +51,11 @@ public class ProductServiceUtil {
 		return getService().getOSGiServiceIdentifier();
 	}
 
+	public static java.util.List<com.liferaystack.products.model.Product> findBystatusAndGroupId(
+		long groupId, int status) {
+		return getService().findBystatusAndGroupId(groupId, status);
+	}
+
 	public static ProductService getService() {
 		return _serviceTracker.getService();
 	}

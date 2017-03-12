@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.model.BaseModel;
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.model.ShardedModel;
 import com.liferay.portal.kernel.model.StagedModel;
+import com.liferay.portal.kernel.model.WorkflowedModel;
 import com.liferay.portal.kernel.service.ServiceContext;
 
 import java.io.Serializable;
@@ -44,7 +45,7 @@ import java.util.Date;
  */
 @ProviderType
 public interface ProductModel extends BaseModel<Product>, ShardedModel,
-	StagedModel {
+	StagedModel, WorkflowedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -215,6 +216,151 @@ public interface ProductModel extends BaseModel<Product>, ShardedModel,
 	 */
 	@Override
 	public void setCompanyId(long companyId);
+
+	/**
+	 * Returns the status of this product.
+	 *
+	 * @return the status of this product
+	 */
+	@Override
+	public int getStatus();
+
+	/**
+	 * Sets the status of this product.
+	 *
+	 * @param status the status of this product
+	 */
+	@Override
+	public void setStatus(int status);
+
+	/**
+	 * Returns the status by user ID of this product.
+	 *
+	 * @return the status by user ID of this product
+	 */
+	@Override
+	public long getStatusByUserId();
+
+	/**
+	 * Sets the status by user ID of this product.
+	 *
+	 * @param statusByUserId the status by user ID of this product
+	 */
+	@Override
+	public void setStatusByUserId(long statusByUserId);
+
+	/**
+	 * Returns the status by user uuid of this product.
+	 *
+	 * @return the status by user uuid of this product
+	 */
+	@Override
+	public String getStatusByUserUuid();
+
+	/**
+	 * Sets the status by user uuid of this product.
+	 *
+	 * @param statusByUserUuid the status by user uuid of this product
+	 */
+	@Override
+	public void setStatusByUserUuid(String statusByUserUuid);
+
+	/**
+	 * Returns the status by user name of this product.
+	 *
+	 * @return the status by user name of this product
+	 */
+	@AutoEscape
+	@Override
+	public String getStatusByUserName();
+
+	/**
+	 * Sets the status by user name of this product.
+	 *
+	 * @param statusByUserName the status by user name of this product
+	 */
+	@Override
+	public void setStatusByUserName(String statusByUserName);
+
+	/**
+	 * Returns the status date of this product.
+	 *
+	 * @return the status date of this product
+	 */
+	@Override
+	public Date getStatusDate();
+
+	/**
+	 * Sets the status date of this product.
+	 *
+	 * @param statusDate the status date of this product
+	 */
+	@Override
+	public void setStatusDate(Date statusDate);
+
+	/**
+	 * Returns <code>true</code> if this product is approved.
+	 *
+	 * @return <code>true</code> if this product is approved; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isApproved();
+
+	/**
+	 * Returns <code>true</code> if this product is denied.
+	 *
+	 * @return <code>true</code> if this product is denied; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isDenied();
+
+	/**
+	 * Returns <code>true</code> if this product is a draft.
+	 *
+	 * @return <code>true</code> if this product is a draft; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isDraft();
+
+	/**
+	 * Returns <code>true</code> if this product is expired.
+	 *
+	 * @return <code>true</code> if this product is expired; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isExpired();
+
+	/**
+	 * Returns <code>true</code> if this product is inactive.
+	 *
+	 * @return <code>true</code> if this product is inactive; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isInactive();
+
+	/**
+	 * Returns <code>true</code> if this product is incomplete.
+	 *
+	 * @return <code>true</code> if this product is incomplete; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isIncomplete();
+
+	/**
+	 * Returns <code>true</code> if this product is pending.
+	 *
+	 * @return <code>true</code> if this product is pending; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isPending();
+
+	/**
+	 * Returns <code>true</code> if this product is scheduled.
+	 *
+	 * @return <code>true</code> if this product is scheduled; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isScheduled();
 
 	@Override
 	public boolean isNew();
