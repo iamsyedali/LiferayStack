@@ -1,18 +1,14 @@
-<%@page import="com.liferay.portal.kernel.util.ListUtil"%>
-<%@page import="java.util.List"%>
-<%@page import="javax.portlet.PortletURL"%>
-<%@page import="com.liferaystack.products.model.Product"%>
 <%@ include file="init.jsp" %>
 
-<liferay-ui:search-container delta="2" emptyResultsMessage="no-products-found" iteratorURL="<%=renderResponse.createRenderURL()%>">
+<liferay-ui:search-container emptyResultsMessage="no-products-found" iteratorURL="<%=renderResponse.createRenderURL()%>" deltaConfigurable="true">
     <liferay-ui:search-container-results  results="<%= ListUtil.subList((List<Product>)request.getAttribute("products"), searchContainer.getStart(), searchContainer.getEnd()) %>" />
     <liferay-ui:search-container-row className="com.liferaystack.products.model.Product" keyProperty="productId" modelVar="product">
-        <liferay-ui:search-container-column-text name="Title" value="${product.name}" />
-        <liferay-ui:search-container-column-text name="Author" value="${product.description}" />
-        <liferay-ui:search-container-column-jsp  name="action" path="/products-action.jsp"/>
+        <liferay-ui:search-container-column-text name="name" value="${product.name}" />
+        <liferay-ui:search-container-column-text name="description" value="${product.description}" />
         <liferay-ui:search-container-column-text name="status">
-        	<aui:workflow-status showIcon="<%= false %>" showLabel="<%= false %>" status="${product.status}" />
+        	<aui:workflow-status showIcon="false" showLabel="false" status="${product.status}" />
         </liferay-ui:search-container-column-text>
+        <liferay-ui:search-container-column-jsp  name="action" path="/products-action.jsp"/>
     </liferay-ui:search-container-row>
     <liferay-ui:search-iterator searchContainer="<%=searchContainer %>" paginate="true" />
 </liferay-ui:search-container>

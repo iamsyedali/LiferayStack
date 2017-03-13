@@ -13,4 +13,7 @@
 
 <%@page import="com.liferay.portal.kernel.util.WebKeys"%>
 <%@page import="com.liferay.taglib.search.ResultRow"%>
+<%@page import="com.liferay.portal.kernel.util.ListUtil"%>
+<%@page import="java.util.List"%>
+<%@page import="javax.portlet.PortletURL"%>
 <%@page import="com.liferaystack.products.model.Product"%>
