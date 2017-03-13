@@ -174,6 +174,15 @@ public class ProductLocalServiceUtil {
 		return getService().updateProduct(product);
 	}
 
+	public static com.liferaystack.products.model.Product updateWorkFlowStatus(
+		long userId, long productId, int status,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .updateWorkFlowStatus(userId, productId, status,
+			serviceContext);
+	}
+
 	/**
 	* Returns the number of products.
 	*
@@ -240,11 +249,6 @@ public class ProductLocalServiceUtil {
 		com.liferay.portal.kernel.util.OrderByComparator<T> orderByComparator) {
 		return getService()
 				   .dynamicQuery(dynamicQuery, start, end, orderByComparator);
-	}
-
-	public static java.util.List<com.liferaystack.products.model.Product> findBystatusAndGroupId(
-		long groupId, int status) {
-		return getService().findBystatusAndGroupId(groupId, status);
 	}
 
 	/**

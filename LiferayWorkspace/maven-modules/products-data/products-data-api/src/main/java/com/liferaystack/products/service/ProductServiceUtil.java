@@ -41,6 +41,14 @@ public class ProductServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link com.liferaystack.products.service.impl.ProductServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static com.liferaystack.products.model.Product updateWorkFlowStatus(
+		long userId, long productId, int status,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .updateWorkFlowStatus(userId, productId, status,
+			serviceContext);
+	}
 
 	/**
 	* Returns the OSGi service identifier.

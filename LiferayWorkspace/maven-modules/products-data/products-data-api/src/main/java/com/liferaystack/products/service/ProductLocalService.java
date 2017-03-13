@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.service.BaseLocalService;
 import com.liferay.portal.kernel.service.PersistedModelLocalService;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -168,6 +169,9 @@ public interface ProductLocalService extends BaseLocalService,
 	@Indexable(type = IndexableType.REINDEX)
 	public Product updateProduct(Product product);
 
+	public Product updateWorkFlowStatus(long userId, long productId,
+		int status, ServiceContext serviceContext) throws PortalException;
+
 	/**
 	* Returns the number of products.
 	*
@@ -221,8 +225,6 @@ public interface ProductLocalService extends BaseLocalService,
 	*/
 	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end, OrderByComparator<T> orderByComparator);
-
-	public List<Product> findBystatusAndGroupId(long groupId, int status);
 
 	/**
 	* Returns a range of all the products.

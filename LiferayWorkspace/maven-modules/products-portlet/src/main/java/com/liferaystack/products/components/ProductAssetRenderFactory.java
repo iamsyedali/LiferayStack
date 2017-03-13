@@ -29,7 +29,7 @@ public class ProductAssetRenderFactory extends BaseAssetRendererFactory<Product>
 	private static Log _log = LogFactoryUtil.getLog(ProductAssetRenderFactory.class);
 
 	@Reference(unbind = "-")
-	 protected void setLeaveService(ProductLocalService productLocalService) {
+	 protected void setProductService(ProductLocalService productLocalService) {
 		_productLocalService = productLocalService;
 	 }
 	

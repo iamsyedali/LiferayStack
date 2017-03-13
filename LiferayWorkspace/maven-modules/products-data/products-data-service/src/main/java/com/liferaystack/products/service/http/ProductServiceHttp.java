@@ -83,8 +83,45 @@ public class ProductServiceHttp {
 		}
 	}
 
+	public static com.liferaystack.products.model.Product updateWorkFlowStatus(
+		HttpPrincipal httpPrincipal, long userId, long productId, int status,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		try {
+			MethodKey methodKey = new MethodKey(ProductServiceUtil.class,
+					"updateWorkFlowStatus", _updateWorkFlowStatusParameterTypes1);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
+					productId, status, serviceContext);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (com.liferaystack.products.model.Product)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(ProductServiceHttp.class);
 	private static final Class<?>[] _findBystatusAndGroupIdParameterTypes0 = new Class[] {
 			long.class, int.class
+		};
+	private static final Class<?>[] _updateWorkFlowStatusParameterTypes1 = new Class[] {
+			long.class, long.class, int.class,
+			com.liferay.portal.kernel.service.ServiceContext.class
 		};
 }

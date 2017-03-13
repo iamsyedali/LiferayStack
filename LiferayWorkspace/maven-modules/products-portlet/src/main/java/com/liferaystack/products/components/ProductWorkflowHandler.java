@@ -16,6 +16,7 @@ import com.liferay.portal.kernel.workflow.BaseWorkflowHandler;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowHandler;
 import com.liferaystack.products.service.ProductLocalService;
+import com.liferaystack.products.model.Product;
 
 @Component(
 		 property = {"model.class.name=com.liferaystack.products.model.Product"},
@@ -44,11 +45,13 @@ public class ProductWorkflowHandler<Product> extends BaseWorkflowHandler<Product
 	 @Override
 	 public Product updateStatus(int status, Map<String, Serializable> workflowContext) throws PortalException {
 	 
-		 Product product = null;
-	   /* long userId = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.CONTEXT_USER_ID));
-	    long leaveId = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.CONTEXT_ENTRY_CLASS_PK));
+		Product product = null;
+	    long userId = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.CONTEXT_USER_ID));
+	    long productId = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.CONTEXT_ENTRY_CLASS_PK));
 	    ServiceContext serviceContext = (ServiceContext)workflowContext.get("serviceContext");
-	    product = _productLocalService.updateStatus(userId, leaveId, status, serviceContext);*/
+	    
+	    _log.info("updating product workflow status");
+	    product = (Product) _productLocalService.updateWorkFlowStatus(userId, productId, status, serviceContext);
 	    return product;
 	 }
 }

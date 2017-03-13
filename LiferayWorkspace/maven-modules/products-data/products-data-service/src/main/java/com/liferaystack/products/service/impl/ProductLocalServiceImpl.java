@@ -16,9 +16,17 @@ package com.liferaystack.products.service.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
+import java.util.Date;
 import java.util.List;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferaystack.products.model.Product;
+import com.liferaystack.products.service.ProductLocalServiceUtil;
 import com.liferaystack.products.service.base.ProductLocalServiceBaseImpl;
 
 /**
@@ -42,7 +50,31 @@ public class ProductLocalServiceImpl extends ProductLocalServiceBaseImpl {
 	 *
 	 * Never reference this class directly. Always use {@link com.liferaystack.products.service.ProductLocalServiceUtil} to access the product local service.
 	 */
-	public List<Product> findBystatusAndGroupId(long groupId, int status) {
-		return productPersistence.findBystatusAndGroupId(groupId, status);
+
+	private static Log _log = LogFactoryUtil.getLog(ProductLocalServiceImpl.class.getName());
+	
+	public Product updateWorkFlowStatus(long userId,long productId,int status,ServiceContext serviceContext) throws PortalException{
+		 
+		Product product = productPersistence.fetchByPrimaryKey(productId);
+		product.setStatus(status);
+		product.setStatusByUserId(userId);
+		product.setStatusDate(new Date());
+		User user = null;
+		 try {
+		      user = userLocalService.getUser(userId);
+		      product.setStatusByUserName(user.getFullName());
+		      product.setStatusByUserUuid(user.getUserUuid());
+		 } catch (PortalException e) {
+			 _log.error("PortalException : "+e.getMessage());
+		 }
+		 
+		 product = productPersistence.update(product);
+		 if (status == WorkflowConstants.STATUS_APPROVED) {  
+		    assetEntryLocalService.updateEntry(Product.class.getName(), productId, new Date(),null, true, true);
+		 } else {
+		     assetEntryLocalService.updateVisible(Product.class.getName(), productId, false);  
+		 }
+		 return product;
 	}
+	
 }

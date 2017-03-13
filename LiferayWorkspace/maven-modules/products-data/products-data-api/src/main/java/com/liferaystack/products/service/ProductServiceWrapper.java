@@ -32,6 +32,15 @@ public class ProductServiceWrapper implements ProductService,
 		_productService = productService;
 	}
 
+	@Override
+	public com.liferaystack.products.model.Product updateWorkFlowStatus(
+		long userId, long productId, int status,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _productService.updateWorkFlowStatus(userId, productId, status,
+			serviceContext);
+	}
+
 	/**
 	* Returns the OSGi service identifier.
 	*

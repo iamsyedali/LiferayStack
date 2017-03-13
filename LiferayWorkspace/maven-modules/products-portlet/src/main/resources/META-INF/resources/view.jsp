@@ -18,4 +18,4 @@
 	<portlet:param name="mvcPath" value="/add-product.jsp"/>
 </portlet:renderURL>
 
-<aui:button href="${addProduct}" value="add-product"/>
+<aui:button href="${addProduct}" value="add-product"/>Syed

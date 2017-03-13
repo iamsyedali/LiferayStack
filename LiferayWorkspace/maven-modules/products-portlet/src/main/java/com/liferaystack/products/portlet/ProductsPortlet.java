@@ -7,10 +7,14 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.ServiceContextFactory;
+import com.liferay.portal.kernel.service.ServiceContextUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
 import com.liferaystack.products.model.Product;
 import com.liferaystack.products.service.ProductLocalServiceUtil;
 
@@ -62,40 +66,20 @@ private static Log _log = LogFactoryUtil.getLog(ProductsPortlet.class);
 		product.setCompanyId(themeDisplay.getCompanyId());
 		product.setCreateDate(new Date());
 		product.setModifiedDate(new Date());
-		ProductLocalServiceUtil.updateProduct(product);
+		product = ProductLocalServiceUtil.updateProduct(product);
 		
-		
-		
-		Date modifiedDate = new Date();
-		String classUuid = product.getUuid();
-		long classPK = product.getProductId();
 		long[] categoryIds = null;
-		String className = Product.class.getName();
-		long classTypeId = 0;
-		boolean listable = false;
-		Date createDate = new Date();
-		String layoutUuid = null;
-		String mimeType = null;
-		Date expirationDate = null;
-		String url = null;
-		Date endDate = null;
-		Date startDate = new Date();
-		String title = product.getName();
-		String[] tagNames = null;
-		boolean visible = true;
-		int height = 0;
-		int width = 0;
-		String summary = product.getName()+" : "+product.getDescription();
-		Double priority = null;
 		
-		AssetEntry updateEntry = AssetEntryLocalServiceUtil.updateEntry(themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), createDate, modifiedDate, className, classPK, classUuid, classTypeId, categoryIds,
-				tagNames, listable, visible, startDate, endDate, expirationDate, mimeType, title, description, summary, url, layoutUuid, height, width, priority);
+		AssetEntry assetEntry = AssetEntryLocalServiceUtil.updateEntry(themeDisplay.getUserId(), themeDisplay.getScopeGroupId(),
+				Product.class.getName(), product.getProductId(), categoryIds, null);
+		//assetEntry.setUrl(rssFeed.getFeedURL());
+		assetEntry.setVisible(true);
+		AssetEntryLocalServiceUtil.updateAssetEntry(assetEntry);
 		
-	
-		/*AssetEntry assetEntry = AssetEntryLocalServiceUtil.updateEntry( themeDisplay .getUserId(), themeDisplay.getScopeGroupId(), new Date(),
-	            new Date(), Product.class.getName(),product.getProductId(), product.getUuid(), 0, null, null, true, false, new Date(), null,
-	            new Date(), null, ContentTypes.TEXT_HTML, product.getName(), product.getName(), null, null, null, 0, 0, null);*/
-		_log.info("addProductAction completed...");
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(actionRequest);
+		WorkflowHandlerRegistryUtil.startWorkflowInstance(product.getCompanyId(), product.getGroupId(), product.getUserId(), Product.class.getName(),
+				 product.getProductId(), product, serviceContext);
+		_log.info("addProductAction completed workflow activated...");
 	}
 	
 	@ProcessAction(name="editProductAction")

@@ -80,5 +80,22 @@ public class ProductServiceSoap {
 		}
 	}
 
+	public static com.liferaystack.products.model.ProductSoap updateWorkFlowStatus(
+		long userId, long productId, int status,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferaystack.products.model.Product returnValue = ProductServiceUtil.updateWorkFlowStatus(userId,
+					productId, status, serviceContext);
+
+			return com.liferaystack.products.model.ProductSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(ProductServiceSoap.class);
 }

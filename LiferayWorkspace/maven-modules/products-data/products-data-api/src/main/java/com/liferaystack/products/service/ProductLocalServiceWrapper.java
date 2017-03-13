@@ -176,6 +176,15 @@ public class ProductLocalServiceWrapper implements ProductLocalService,
 		return _productLocalService.updateProduct(product);
 	}
 
+	@Override
+	public com.liferaystack.products.model.Product updateWorkFlowStatus(
+		long userId, long productId, int status,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _productLocalService.updateWorkFlowStatus(userId, productId,
+			status, serviceContext);
+	}
+
 	/**
 	* Returns the number of products.
 	*
@@ -247,12 +256,6 @@ public class ProductLocalServiceWrapper implements ProductLocalService,
 		com.liferay.portal.kernel.util.OrderByComparator<T> orderByComparator) {
 		return _productLocalService.dynamicQuery(dynamicQuery, start, end,
 			orderByComparator);
-	}
-
-	@Override
-	public java.util.List<com.liferaystack.products.model.Product> findBystatusAndGroupId(
-		long groupId, int status) {
-		return _productLocalService.findBystatusAndGroupId(groupId, status);
 	}
 
 	/**

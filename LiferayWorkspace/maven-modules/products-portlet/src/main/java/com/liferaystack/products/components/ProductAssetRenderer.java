@@ -72,7 +72,7 @@ public class ProductAssetRenderer extends BaseJSPAssetRenderer<Product> {
 
 	@Override
 	public String getJspPath(HttpServletRequest arg0, String arg1) {
-		return "/leave/product-details.jsp";
+		return "/product/product-details.jsp";
 	}
 	
 	@Override

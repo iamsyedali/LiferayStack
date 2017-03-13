@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
 import com.liferay.portal.kernel.security.access.control.AccessControlled;
 import com.liferay.portal.kernel.service.BaseService;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.spring.osgi.OSGiBeanProperties;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -53,6 +54,8 @@ public interface ProductService extends BaseService {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link ProductServiceUtil} to access the product remote service. Add custom service methods to {@link com.liferaystack.products.service.impl.ProductServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public Product updateWorkFlowStatus(long userId, long productId,
+		int status, ServiceContext serviceContext) throws PortalException;
 
 	/**
 	* Returns the OSGi service identifier.
