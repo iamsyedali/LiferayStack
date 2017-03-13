@@ -9,6 +9,8 @@ import com.liferay.asset.kernel.model.AssetRenderer;
 import com.liferay.asset.kernel.model.AssetRendererFactory;
 import com.liferay.asset.kernel.model.BaseAssetRendererFactory;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ResourceBundleLoader;
 import com.liferaystack.products.model.Product;
 import com.liferaystack.products.service.ProductLocalService;
@@ -24,6 +26,7 @@ public class ProductAssetRenderFactory extends BaseAssetRendererFactory<Product>
 	private ProductLocalService _productLocalService;
 	private ResourceBundleLoader _resourceBundleLoader;
 	private ServletContext _servletContext;
+	private static Log _log = LogFactoryUtil.getLog(ProductAssetRenderFactory.class);
 
 	@Reference(unbind = "-")
 	 protected void setLeaveService(ProductLocalService productLocalService) {

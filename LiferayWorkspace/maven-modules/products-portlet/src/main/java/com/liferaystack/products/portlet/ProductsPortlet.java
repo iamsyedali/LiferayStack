@@ -1,11 +1,14 @@
 package com.liferaystack.products.portlet;
 
+import com.liferay.asset.kernel.model.AssetEntry;
+import com.liferay.asset.kernel.service.AssetEntryLocalServiceUtil;
 import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferaystack.products.model.Product;
@@ -44,7 +47,7 @@ public class ProductsPortlet extends MVCPortlet {
 private static Log _log = LogFactoryUtil.getLog(ProductsPortlet.class);
 	
 	@ProcessAction(name="addProductAction")
-	public void addProductAction(ActionRequest actionRequest, ActionResponse actionResponse) throws IOException, PortletException {
+	public void addProductAction(ActionRequest actionRequest, ActionResponse actionResponse) throws IOException, PortletException, PortalException {
 		_log.info("addProductAction....");
 		ThemeDisplay themeDisplay = (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 		long groupId = themeDisplay.getScopeGroupId();
@@ -60,6 +63,38 @@ private static Log _log = LogFactoryUtil.getLog(ProductsPortlet.class);
 		product.setCreateDate(new Date());
 		product.setModifiedDate(new Date());
 		ProductLocalServiceUtil.updateProduct(product);
+		
+		
+		
+		Date modifiedDate = new Date();
+		String classUuid = product.getUuid();
+		long classPK = product.getProductId();
+		long[] categoryIds = null;
+		String className = Product.class.getName();
+		long classTypeId = 0;
+		boolean listable = false;
+		Date createDate = new Date();
+		String layoutUuid = null;
+		String mimeType = null;
+		Date expirationDate = null;
+		String url = null;
+		Date endDate = null;
+		Date startDate = new Date();
+		String title = product.getName();
+		String[] tagNames = null;
+		boolean visible = true;
+		int height = 0;
+		int width = 0;
+		String summary = product.getName()+" : "+product.getDescription();
+		Double priority = null;
+		
+		AssetEntry updateEntry = AssetEntryLocalServiceUtil.updateEntry(themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), createDate, modifiedDate, className, classPK, classUuid, classTypeId, categoryIds,
+				tagNames, listable, visible, startDate, endDate, expirationDate, mimeType, title, description, summary, url, layoutUuid, height, width, priority);
+		
+	
+		/*AssetEntry assetEntry = AssetEntryLocalServiceUtil.updateEntry( themeDisplay .getUserId(), themeDisplay.getScopeGroupId(), new Date(),
+	            new Date(), Product.class.getName(),product.getProductId(), product.getUuid(), 0, null, null, true, false, new Date(), null,
+	            new Date(), null, ContentTypes.TEXT_HTML, product.getName(), product.getName(), null, null, null, 0, 0, null);*/
 		_log.info("addProductAction completed...");
 	}
 	

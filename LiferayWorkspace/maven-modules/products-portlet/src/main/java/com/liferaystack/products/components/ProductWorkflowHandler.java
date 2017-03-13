@@ -8,6 +8,8 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.workflow.BaseWorkflowHandler;
@@ -23,6 +25,7 @@ import com.liferaystack.products.service.ProductLocalService;
 public class ProductWorkflowHandler<Product> extends BaseWorkflowHandler<Product> {
 	
 	private ProductLocalService _productLocalService;
+	private static Log _log = LogFactoryUtil.getLog(ProductWorkflowHandler.class);
 	
 	   @Reference(unbind = "-")
 	   protected void setProductLocalService(ProductLocalService productLocalService) {

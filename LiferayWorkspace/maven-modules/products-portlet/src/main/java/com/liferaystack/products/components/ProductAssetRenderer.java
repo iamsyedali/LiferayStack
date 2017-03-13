@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.liferay.asset.kernel.model.BaseJSPAssetRenderer;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ResourceBundleLoader;
 import com.liferaystack.products.model.Product;
 
@@ -15,6 +17,7 @@ public class ProductAssetRenderer extends BaseJSPAssetRenderer<Product> {
 
 	private final Product _product;
 	private final ResourceBundleLoader _resourceBundleLoader;
+	private static Log _log = LogFactoryUtil.getLog(ProductAssetRenderer.class);
 	
 	
 	public ProductAssetRenderer(Product product, ResourceBundleLoader resourceBundleLoader) {
