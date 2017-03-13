@@ -25,6 +25,7 @@ public class ProductAssetRenderer extends BaseJSPAssetRenderer<Product> {
 		_resourceBundleLoader = resourceBundleLoader;
 	 }
 	
+	
 	@Override
 	public Product getAssetObject() {
 		return _product;
@@ -42,7 +43,7 @@ public class ProductAssetRenderer extends BaseJSPAssetRenderer<Product> {
 
 	@Override
 	public String getUserName() {
-		return null;
+		return _product.getUserName();
 	}
 
 	@Override
@@ -66,19 +67,22 @@ public class ProductAssetRenderer extends BaseJSPAssetRenderer<Product> {
 	}
 
 	@Override
-	public String getTitle(Locale arg0) {
+	public String getTitle(Locale locale) {
 		return "Name : "+_product.getName();
 	}
 
 	@Override
-	public String getJspPath(HttpServletRequest arg0, String arg1) {
+	public String getJspPath(HttpServletRequest httpServletRequest, String template) {
+		httpServletRequest.setAttribute("product", _product);
+		_log.info("getJspPath");
 		return "/product/product-details.jsp";
 	}
+	
 	
 	@Override
 	 public boolean include(HttpServletRequest request, HttpServletResponse response, String template) throws Exception {
 	    request.setAttribute("product", _product);
+		_log.info("include");
 	    return super.include(request, response, template);
 	 }
-
 }

@@ -10,6 +10,9 @@
         <liferay-ui:search-container-column-text name="Title" value="${product.name}" />
         <liferay-ui:search-container-column-text name="Author" value="${product.description}" />
         <liferay-ui:search-container-column-jsp  name="action" path="/products-action.jsp"/>
+        <liferay-ui:search-container-column-text name="status">
+        	<aui:workflow-status showIcon="<%= false %>" showLabel="<%= false %>" status="${product.status}" />
+        </liferay-ui:search-container-column-text>
     </liferay-ui:search-container-row>
     <liferay-ui:search-iterator searchContainer="<%=searchContainer %>" paginate="true" />
 </liferay-ui:search-container>
