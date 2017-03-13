@@ -1,23 +1,5 @@
 package com.liferaystack.products.portlet;
 
-import com.liferay.asset.kernel.model.AssetEntry;
-import com.liferay.asset.kernel.service.AssetEntryLocalServiceUtil;
-import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
-import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.service.ServiceContextFactory;
-import com.liferay.portal.kernel.service.ServiceContextUtil;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.ContentTypes;
-import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.WebKeys;
-import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
-import com.liferaystack.products.model.Product;
-import com.liferaystack.products.service.ProductLocalServiceUtil;
-
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
@@ -31,6 +13,22 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 import org.osgi.service.component.annotations.Component;
+
+import com.liferay.asset.kernel.model.AssetEntry;
+import com.liferay.asset.kernel.service.AssetEntryLocalServiceUtil;
+import com.liferay.counter.kernel.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.ServiceContextFactory;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
+import com.liferaystack.products.model.Product;
+import com.liferaystack.products.service.ProductLocalServiceUtil;
 
 @Component(
 	immediate = true,
@@ -72,10 +70,9 @@ private static Log _log = LogFactoryUtil.getLog(ProductsPortlet.class);
 		
 		AssetEntry assetEntry = AssetEntryLocalServiceUtil.updateEntry(themeDisplay.getUserId(), themeDisplay.getScopeGroupId(),
 				Product.class.getName(), product.getProductId(), categoryIds, null);
-		//assetEntry.setUrl(rssFeed.getFeedURL());
 		assetEntry.setVisible(true);
 		AssetEntryLocalServiceUtil.updateAssetEntry(assetEntry);
-		
+
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(actionRequest);
 		WorkflowHandlerRegistryUtil.startWorkflowInstance(product.getCompanyId(), product.getGroupId(), product.getUserId(), Product.class.getName(),
 				 product.getProductId(), product, serviceContext);
