@@ -12,12 +12,13 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ResourceBundleLoader;
+import com.liferaystack.products.constants.ProductPortletKeys;
 import com.liferaystack.products.model.Product;
 import com.liferaystack.products.service.ProductLocalService;
 
 @Component(
 		 immediate = true,
-		 property = {"javax.portlet.name=com_liferaystack_products_portlet_ProductsPortlet"},
+		 property = {"javax.portlet.name="+ProductPortletKeys.PRODUCT_PORTLET_NAME},
 		 service = AssetRendererFactory.class
 )
 
