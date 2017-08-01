@@ -1,0 +1,9 @@
+Bundle-Name: products-api
+Bundle-SymbolicName: products.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	products.exception,\
+	products.model,\
+	products.service,\
+	products.service.persistence
+-includeresource: META-INF/service.xml=../products-service/service.xml

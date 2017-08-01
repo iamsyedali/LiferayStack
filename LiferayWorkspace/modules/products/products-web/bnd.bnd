@@ -1,0 +1,3 @@
+Bundle-Name: products-web
+Bundle-SymbolicName: com.liferaystack.products.web
+Bundle-Version: 1.0.0
