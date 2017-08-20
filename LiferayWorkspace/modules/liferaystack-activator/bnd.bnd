@@ -1,0 +1,4 @@
+Bundle-Activator: com.liferaystack.activator.LiferaystackActivator
+Bundle-Name: liferaystack-activator
+Bundle-SymbolicName: com.liferaystack.activator
+Bundle-Version: 1.0.0
