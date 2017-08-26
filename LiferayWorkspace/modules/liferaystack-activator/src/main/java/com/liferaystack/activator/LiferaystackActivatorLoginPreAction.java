@@ -38,7 +38,7 @@ import com.liferay.portal.kernel.util.PortalUtil;
 @Component(
 	immediate = true,
 	property = {
-        "key=login.events.post"
+        "key=login.events.pre"
     },
     service = LifecycleAction.class
 )
