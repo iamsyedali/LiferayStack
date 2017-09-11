@@ -1,0 +1,4 @@
+Bundle-Name: liferaystack-action-render-resource-url
+Bundle-SymbolicName: liferaystack.action.render.resource.url
+Bundle-Version: 1.0.0
+Export-Package: liferaystack.action.render.resource.url.constants

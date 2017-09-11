@@ -1,5 +1,10 @@
-<%@ include file="/init.jsp" %>
+<%@page import="com.liferay.portal.kernel.portlet.LiferayWindowState"%>
+<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
-<p>
-	<b><liferay-ui:message key="test-web.caption"/></b>
-</p>
+<liferay-theme:defineObjects />
+
+<portlet:defineObjects />
+
+<portlet:actionURL var="doActionVariable" name="doActionMethodName" windowState="<%=LiferayWindowState.NORMAL%>">
+	<portlet:param name="title" value="LiferayStack"/>
+</portlet:actionURL>
