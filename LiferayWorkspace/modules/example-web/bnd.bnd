@@ -1,0 +1,4 @@
+Bundle-Name: example-web
+Bundle-SymbolicName: com.liferaystack.example
+Bundle-Version: 1.0.0
+Export-Package: com.liferaystack.example.constants
