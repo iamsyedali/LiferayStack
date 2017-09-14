@@ -8,6 +8,7 @@
 <liferay-theme:defineObjects />
 <portlet:defineObjects />
 
+
 <%-- Implicit Objects From <portlet:defineObjects /> --%>
 <%
 	actionRequest;
