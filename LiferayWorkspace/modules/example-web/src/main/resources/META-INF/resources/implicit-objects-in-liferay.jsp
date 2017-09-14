@@ -9,8 +9,8 @@
 <portlet:defineObjects />
 
 
-<%-- Implicit Objects From <portlet:defineObjects /> --%>
 <%
+	/* Implicit Objects From <portlet:defineObjects */
 	actionRequest;
 	actionResponse;
 	eventRequest;
@@ -30,8 +30,8 @@
 	searchContainerReference;
 %>
 
-<!-- Implicit Objects From <liferay-theme:defineObjects /> -->
 <%
+	/* Implicit Objects From <liferay-theme:defineObjects  */
 	account;
 	colorScheme;
 	company;
@@ -52,8 +52,9 @@
 	user;
 %>
 
-<!-- Implicit Objects From JSP -->
+
 <%
+	/* Implicit Objects From JSP */
 	application;
 	config;
 	out;
