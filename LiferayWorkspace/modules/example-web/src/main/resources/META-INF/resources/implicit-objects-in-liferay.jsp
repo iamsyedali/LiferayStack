@@ -8,7 +8,6 @@
 <liferay-theme:defineObjects />
 <portlet:defineObjects />
 
-
 <%
 	/* Implicit Objects From <portlet:defineObjects */
 	actionRequest;
@@ -28,9 +27,7 @@
 	resourceRequest;
 	resourceResponse;
 	searchContainerReference;
-%>
 
-<%
 	/* Implicit Objects From <liferay-theme:defineObjects  */
 	account;
 	colorScheme;
@@ -50,10 +47,7 @@
 	themeDisplay;
 	timeZone;
 	user;
-%>
 
-
-<%
 	/* Implicit Objects From JSP */
 	application;
 	config;
