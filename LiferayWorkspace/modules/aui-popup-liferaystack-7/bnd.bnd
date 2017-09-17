@@ -1,0 +1,4 @@
+Bundle-Name: aui-popup-liferaystack-7
+Bundle-SymbolicName: com.liferaystack.portlet.aui.popup
+Bundle-Version: 1.0.0
+Export-Package: com.liferaystack.portlet.aui.popup.constants
