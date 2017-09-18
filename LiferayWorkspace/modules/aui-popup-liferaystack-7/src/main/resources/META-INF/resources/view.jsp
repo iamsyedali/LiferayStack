@@ -70,3 +70,13 @@ popupButton.on('click',
 	}
 );
 </aui:script>
+
+<!-- AUI Script For Closing POPUP -->
+<aui:script position="inline" use="aui-base">
+var cancelButton = A.one('#<portlet:namespace />cancelButton');
+cancelButton.on('click',
+	function() {
+		alert("close poup");
+	}
+);
+</aui:script>
