@@ -25,8 +25,7 @@
 </br>
 <div id="my-content-div">
 	<div>
-		This Content Is From DIV This DIV is Used To Render The AUI Modal Popup, 
-		ideally you can hide it.
+		DIVContent Is Rendered In The AUI Modal Popup.
 	</div>
 </div>
 
@@ -35,7 +34,7 @@
 A.one("#<portlet:namespace />openDiv").on('click',function(event){
 	var dialog = new A.Modal({
 		title: "AUI Modal Popup Title",
-		bodyContent: "AUI Modal Popup Content Use it For Simple Popup Opertions",
+		bodyContent: A.one("#my-content-div").html(),
 		headerContent: 'AUI Modal Heading',
 		centered: true,
 		modal: true,
