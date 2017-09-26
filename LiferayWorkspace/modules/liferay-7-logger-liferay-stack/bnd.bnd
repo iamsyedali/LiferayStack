@@ -1,0 +1,4 @@
+Bundle-Name: liferay-7-logger-liferay-stack
+Bundle-SymbolicName: com.liferaystack.logger
+Bundle-Version: 1.0.0
+Export-Package: com.liferaystack.logger.constants
