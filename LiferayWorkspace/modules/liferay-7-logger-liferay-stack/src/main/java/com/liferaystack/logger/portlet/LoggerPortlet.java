@@ -9,11 +9,9 @@ import javax.portlet.RenderResponse;
 
 import org.osgi.service.component.annotations.Component;
 
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
-import com.liferay.portal.kernel.service.UserLocalServiceUtil;
 import com.liferaystack.logger.constants.LoggerPortletKeys;
 
 /**
@@ -47,7 +45,7 @@ public class LoggerPortlet extends MVCPortlet {
 		_log.warn("Use WARN To Log Warning Message");
 		_log.error("Use ERROR To Log Error Message ");
 		_log.debug("Use DEBUG To Log Debug Message ");
-		_log.fatal("Use DEBUG To Log Fatal Message");
+		_log.fatal("Use FATAL To Log Fatal Message");
 		_log.trace("Use TRACE To Log Trace Message of the exception");
 		
 		// To Check Whether Log is Enabled for INFO Level  
@@ -63,23 +61,6 @@ public class LoggerPortlet extends MVCPortlet {
 		_log.isDebugEnabled();
 		_log.isFatalEnabled();
 		_log.isTraceEnabled();
-		
-		// To Log only error
-		try {
-			UserLocalServiceUtil.getUser(0);
-		} catch (PortalException e) {
-			_log.error(e);
-		}
-		
-		// To Log Defined Message and error
-		try {
-			UserLocalServiceUtil.getUser(0);
-		} catch (PortalException e) {
-			_log.error("User Not Found Message ",e);
-		}
-		
-		// To Set LogWrapper
-		_log.setLogWrapperClassName(CustomLogWrapper.class.getName());
 		
 		super.render(renderRequest, renderResponse);
 	}
