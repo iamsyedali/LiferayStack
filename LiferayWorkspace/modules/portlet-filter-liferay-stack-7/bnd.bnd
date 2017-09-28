@@ -1,0 +1,4 @@
+Bundle-Name: portlet-filter-liferay-stack-7
+Bundle-SymbolicName: com.liferaystack
+Bundle-Version: 1.0.0
+Export-Package: com.liferaystack.constants
