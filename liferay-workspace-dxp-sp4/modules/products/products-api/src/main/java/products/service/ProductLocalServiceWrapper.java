@@ -329,6 +329,15 @@ public class ProductLocalServiceWrapper implements ProductLocalService,
 	}
 
 	@Override
+	public products.model.Product updteProductMy(long productId,
+		java.lang.String name, java.lang.String description,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _productLocalService.updteProductMy(productId, name,
+			description, serviceContext);
+	}
+
+	@Override
 	public void updateAsset(long userId, products.model.Product product,
 		long[] assetCategoryIds, java.lang.String[] assetTagNames,
 		long[] assetLinkEntryIds, java.lang.Double priority)

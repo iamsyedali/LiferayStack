@@ -284,6 +284,10 @@ public interface ProductLocalService extends BaseLocalService,
 	@Indexable(type = IndexableType.REINDEX)
 	public Product updateProduct(Product product);
 
+	public Product updteProductMy(long productId, java.lang.String name,
+		java.lang.String description, ServiceContext serviceContext)
+		throws PortalException;
+
 	public void updateAsset(long userId, Product product,
 		long[] assetCategoryIds, java.lang.String[] assetTagNames,
 		long[] assetLinkEntryIds, java.lang.Double priority)

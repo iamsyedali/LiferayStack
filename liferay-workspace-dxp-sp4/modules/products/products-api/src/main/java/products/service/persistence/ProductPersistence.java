@@ -369,6 +369,277 @@ public interface ProductPersistence extends BasePersistence<Product> {
 	public int countByUuid_C(java.lang.String uuid, long companyId);
 
 	/**
+	* Returns all the products where status = &#63;.
+	*
+	* @param status the status
+	* @return the matching products
+	*/
+	public java.util.List<Product> findByStatus(int status);
+
+	/**
+	* Returns a range of all the products where status = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ProductModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param status the status
+	* @param start the lower bound of the range of products
+	* @param end the upper bound of the range of products (not inclusive)
+	* @return the range of matching products
+	*/
+	public java.util.List<Product> findByStatus(int status, int start, int end);
+
+	/**
+	* Returns an ordered range of all the products where status = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ProductModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param status the status
+	* @param start the lower bound of the range of products
+	* @param end the upper bound of the range of products (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching products
+	*/
+	public java.util.List<Product> findByStatus(int status, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<Product> orderByComparator);
+
+	/**
+	* Returns an ordered range of all the products where status = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ProductModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param status the status
+	* @param start the lower bound of the range of products
+	* @param end the upper bound of the range of products (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching products
+	*/
+	public java.util.List<Product> findByStatus(int status, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<Product> orderByComparator,
+		boolean retrieveFromCache);
+
+	/**
+	* Returns the first product in the ordered set where status = &#63;.
+	*
+	* @param status the status
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching product
+	* @throws NoSuchProductException if a matching product could not be found
+	*/
+	public Product findByStatus_First(int status,
+		com.liferay.portal.kernel.util.OrderByComparator<Product> orderByComparator)
+		throws NoSuchProductException;
+
+	/**
+	* Returns the first product in the ordered set where status = &#63;.
+	*
+	* @param status the status
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching product, or <code>null</code> if a matching product could not be found
+	*/
+	public Product fetchByStatus_First(int status,
+		com.liferay.portal.kernel.util.OrderByComparator<Product> orderByComparator);
+
+	/**
+	* Returns the last product in the ordered set where status = &#63;.
+	*
+	* @param status the status
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching product
+	* @throws NoSuchProductException if a matching product could not be found
+	*/
+	public Product findByStatus_Last(int status,
+		com.liferay.portal.kernel.util.OrderByComparator<Product> orderByComparator)
+		throws NoSuchProductException;
+
+	/**
+	* Returns the last product in the ordered set where status = &#63;.
+	*
+	* @param status the status
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching product, or <code>null</code> if a matching product could not be found
+	*/
+	public Product fetchByStatus_Last(int status,
+		com.liferay.portal.kernel.util.OrderByComparator<Product> orderByComparator);
+
+	/**
+	* Returns the products before and after the current product in the ordered set where status = &#63;.
+	*
+	* @param productId the primary key of the current product
+	* @param status the status
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next product
+	* @throws NoSuchProductException if a product with the primary key could not be found
+	*/
+	public Product[] findByStatus_PrevAndNext(long productId, int status,
+		com.liferay.portal.kernel.util.OrderByComparator<Product> orderByComparator)
+		throws NoSuchProductException;
+
+	/**
+	* Removes all the products where status = &#63; from the database.
+	*
+	* @param status the status
+	*/
+	public void removeByStatus(int status);
+
+	/**
+	* Returns the number of products where status = &#63;.
+	*
+	* @param status the status
+	* @return the number of matching products
+	*/
+	public int countByStatus(int status);
+
+	/**
+	* Returns all the products where groupId = &#63; and status = &#63;.
+	*
+	* @param groupId the group ID
+	* @param status the status
+	* @return the matching products
+	*/
+	public java.util.List<Product> findByG_S(long groupId, int status);
+
+	/**
+	* Returns a range of all the products where groupId = &#63; and status = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ProductModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param status the status
+	* @param start the lower bound of the range of products
+	* @param end the upper bound of the range of products (not inclusive)
+	* @return the range of matching products
+	*/
+	public java.util.List<Product> findByG_S(long groupId, int status,
+		int start, int end);
+
+	/**
+	* Returns an ordered range of all the products where groupId = &#63; and status = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ProductModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param status the status
+	* @param start the lower bound of the range of products
+	* @param end the upper bound of the range of products (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching products
+	*/
+	public java.util.List<Product> findByG_S(long groupId, int status,
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<Product> orderByComparator);
+
+	/**
+	* Returns an ordered range of all the products where groupId = &#63; and status = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ProductModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param status the status
+	* @param start the lower bound of the range of products
+	* @param end the upper bound of the range of products (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the ordered range of matching products
+	*/
+	public java.util.List<Product> findByG_S(long groupId, int status,
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<Product> orderByComparator,
+		boolean retrieveFromCache);
+
+	/**
+	* Returns the first product in the ordered set where groupId = &#63; and status = &#63;.
+	*
+	* @param groupId the group ID
+	* @param status the status
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching product
+	* @throws NoSuchProductException if a matching product could not be found
+	*/
+	public Product findByG_S_First(long groupId, int status,
+		com.liferay.portal.kernel.util.OrderByComparator<Product> orderByComparator)
+		throws NoSuchProductException;
+
+	/**
+	* Returns the first product in the ordered set where groupId = &#63; and status = &#63;.
+	*
+	* @param groupId the group ID
+	* @param status the status
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching product, or <code>null</code> if a matching product could not be found
+	*/
+	public Product fetchByG_S_First(long groupId, int status,
+		com.liferay.portal.kernel.util.OrderByComparator<Product> orderByComparator);
+
+	/**
+	* Returns the last product in the ordered set where groupId = &#63; and status = &#63;.
+	*
+	* @param groupId the group ID
+	* @param status the status
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching product
+	* @throws NoSuchProductException if a matching product could not be found
+	*/
+	public Product findByG_S_Last(long groupId, int status,
+		com.liferay.portal.kernel.util.OrderByComparator<Product> orderByComparator)
+		throws NoSuchProductException;
+
+	/**
+	* Returns the last product in the ordered set where groupId = &#63; and status = &#63;.
+	*
+	* @param groupId the group ID
+	* @param status the status
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching product, or <code>null</code> if a matching product could not be found
+	*/
+	public Product fetchByG_S_Last(long groupId, int status,
+		com.liferay.portal.kernel.util.OrderByComparator<Product> orderByComparator);
+
+	/**
+	* Returns the products before and after the current product in the ordered set where groupId = &#63; and status = &#63;.
+	*
+	* @param productId the primary key of the current product
+	* @param groupId the group ID
+	* @param status the status
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next product
+	* @throws NoSuchProductException if a product with the primary key could not be found
+	*/
+	public Product[] findByG_S_PrevAndNext(long productId, long groupId,
+		int status,
+		com.liferay.portal.kernel.util.OrderByComparator<Product> orderByComparator)
+		throws NoSuchProductException;
+
+	/**
+	* Removes all the products where groupId = &#63; and status = &#63; from the database.
+	*
+	* @param groupId the group ID
+	* @param status the status
+	*/
+	public void removeByG_S(long groupId, int status);
+
+	/**
+	* Returns the number of products where groupId = &#63; and status = &#63;.
+	*
+	* @param groupId the group ID
+	* @param status the status
+	* @return the number of matching products
+	*/
+	public int countByG_S(long groupId, int status);
+
+	/**
 	* Caches the product in the entity cache if it is enabled.
 	*
 	* @param product the product

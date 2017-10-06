@@ -69,6 +69,10 @@ public class ProductWrapper implements Product, ModelWrapper<Product> {
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
+		attributes.put("status", getStatus());
+		attributes.put("statusByUserId", getStatusByUserId());
+		attributes.put("statusByUserName", getStatusByUserName());
+		attributes.put("statusDate", getStatusDate());
 
 		return attributes;
 	}
@@ -134,6 +138,40 @@ public class ProductWrapper implements Product, ModelWrapper<Product> {
 		if (modifiedDate != null) {
 			setModifiedDate(modifiedDate);
 		}
+
+		Integer status = (Integer)attributes.get("status");
+
+		if (status != null) {
+			setStatus(status);
+		}
+
+		Long statusByUserId = (Long)attributes.get("statusByUserId");
+
+		if (statusByUserId != null) {
+			setStatusByUserId(statusByUserId);
+		}
+
+		String statusByUserName = (String)attributes.get("statusByUserName");
+
+		if (statusByUserName != null) {
+			setStatusByUserName(statusByUserName);
+		}
+
+		Date statusDate = (Date)attributes.get("statusDate");
+
+		if (statusDate != null) {
+			setStatusDate(statusDate);
+		}
+	}
+
+	/**
+	* Returns <code>true</code> if this product is approved.
+	*
+	* @return <code>true</code> if this product is approved; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isApproved() {
+		return _product.isApproved();
 	}
 
 	@Override
@@ -141,14 +179,84 @@ public class ProductWrapper implements Product, ModelWrapper<Product> {
 		return _product.isCachedModel();
 	}
 
+	/**
+	* Returns <code>true</code> if this product is denied.
+	*
+	* @return <code>true</code> if this product is denied; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isDenied() {
+		return _product.isDenied();
+	}
+
+	/**
+	* Returns <code>true</code> if this product is a draft.
+	*
+	* @return <code>true</code> if this product is a draft; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isDraft() {
+		return _product.isDraft();
+	}
+
 	@Override
 	public boolean isEscapedModel() {
 		return _product.isEscapedModel();
 	}
 
+	/**
+	* Returns <code>true</code> if this product is expired.
+	*
+	* @return <code>true</code> if this product is expired; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isExpired() {
+		return _product.isExpired();
+	}
+
+	/**
+	* Returns <code>true</code> if this product is inactive.
+	*
+	* @return <code>true</code> if this product is inactive; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isInactive() {
+		return _product.isInactive();
+	}
+
+	/**
+	* Returns <code>true</code> if this product is incomplete.
+	*
+	* @return <code>true</code> if this product is incomplete; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isIncomplete() {
+		return _product.isIncomplete();
+	}
+
 	@Override
 	public boolean isNew() {
 		return _product.isNew();
+	}
+
+	/**
+	* Returns <code>true</code> if this product is pending.
+	*
+	* @return <code>true</code> if this product is pending; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isPending() {
+		return _product.isPending();
+	}
+
+	/**
+	* Returns <code>true</code> if this product is scheduled.
+	*
+	* @return <code>true</code> if this product is scheduled; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isScheduled() {
+		return _product.isScheduled();
 	}
 
 	@Override
@@ -164,6 +272,16 @@ public class ProductWrapper implements Product, ModelWrapper<Product> {
 	@Override
 	public int compareTo(products.model.Product product) {
 		return _product.compareTo(product);
+	}
+
+	/**
+	* Returns the status of this product.
+	*
+	* @return the status of this product
+	*/
+	@Override
+	public int getStatus() {
+		return _product.getStatus();
 	}
 
 	@Override
@@ -199,6 +317,26 @@ public class ProductWrapper implements Product, ModelWrapper<Product> {
 	@Override
 	public java.lang.String getName() {
 		return _product.getName();
+	}
+
+	/**
+	* Returns the status by user name of this product.
+	*
+	* @return the status by user name of this product
+	*/
+	@Override
+	public java.lang.String getStatusByUserName() {
+		return _product.getStatusByUserName();
+	}
+
+	/**
+	* Returns the status by user uuid of this product.
+	*
+	* @return the status by user uuid of this product
+	*/
+	@Override
+	public java.lang.String getStatusByUserUuid() {
+		return _product.getStatusByUserUuid();
 	}
 
 	/**
@@ -262,6 +400,16 @@ public class ProductWrapper implements Product, ModelWrapper<Product> {
 	}
 
 	/**
+	* Returns the status date of this product.
+	*
+	* @return the status date of this product
+	*/
+	@Override
+	public Date getStatusDate() {
+		return _product.getStatusDate();
+	}
+
+	/**
 	* Returns the company ID of this product.
 	*
 	* @return the company ID of this product
@@ -299,6 +447,16 @@ public class ProductWrapper implements Product, ModelWrapper<Product> {
 	@Override
 	public long getProductId() {
 		return _product.getProductId();
+	}
+
+	/**
+	* Returns the status by user ID of this product.
+	*
+	* @return the status by user ID of this product
+	*/
+	@Override
+	public long getStatusByUserId() {
+		return _product.getStatusByUserId();
 	}
 
 	/**
@@ -435,6 +593,56 @@ public class ProductWrapper implements Product, ModelWrapper<Product> {
 	@Override
 	public void setProductId(long productId) {
 		_product.setProductId(productId);
+	}
+
+	/**
+	* Sets the status of this product.
+	*
+	* @param status the status of this product
+	*/
+	@Override
+	public void setStatus(int status) {
+		_product.setStatus(status);
+	}
+
+	/**
+	* Sets the status by user ID of this product.
+	*
+	* @param statusByUserId the status by user ID of this product
+	*/
+	@Override
+	public void setStatusByUserId(long statusByUserId) {
+		_product.setStatusByUserId(statusByUserId);
+	}
+
+	/**
+	* Sets the status by user name of this product.
+	*
+	* @param statusByUserName the status by user name of this product
+	*/
+	@Override
+	public void setStatusByUserName(java.lang.String statusByUserName) {
+		_product.setStatusByUserName(statusByUserName);
+	}
+
+	/**
+	* Sets the status by user uuid of this product.
+	*
+	* @param statusByUserUuid the status by user uuid of this product
+	*/
+	@Override
+	public void setStatusByUserUuid(java.lang.String statusByUserUuid) {
+		_product.setStatusByUserUuid(statusByUserUuid);
+	}
+
+	/**
+	* Sets the status date of this product.
+	*
+	* @param statusDate the status date of this product
+	*/
+	@Override
+	public void setStatusDate(Date statusDate) {
+		_product.setStatusDate(statusDate);
 	}
 
 	/**
