@@ -28,6 +28,8 @@ import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 
+import java.util.Date;
+
 import aQute.bnd.annotation.ProviderType;
 import products.model.Product;
 import products.service.ProductLocalServiceUtil;
@@ -61,8 +63,11 @@ public class ProductLocalServiceImpl extends ProductLocalServiceBaseImpl {
 		Product product = ProductLocalServiceUtil.createProduct(productId) ;
 		long groupId = serviceContext.getScopeGroupId();
 		product.setGroupId(groupId);
-		_log.info("addProductMy product : "+product.toString());
-		product = super.addProduct(product);
+		product.setName(name);
+		product.setDescription(description);
+		ProductLocalServiceUtil.addProduct(product);
+		_log.info("addProduct..... product : "+product.toString());
+//		product = super.addProduct(product);
 
 		Double priority = serviceContext.getAssetPriority();
 		long[] assetCategoryIds = serviceContext.getAssetCategoryIds();
@@ -70,20 +75,115 @@ public class ProductLocalServiceImpl extends ProductLocalServiceBaseImpl {
 		long[] assetLinkEntryIds = serviceContext.getAssetLinkEntryIds();
 		long userId = serviceContext.getUserId();
 		
-		try {
+		/*try {
 			updateAsset(userId, product, assetCategoryIds, assetTagNames, assetLinkEntryIds, priority);
 		} catch (PortalException e) {
 			_log.error("PortalException While Updting Asset Entry : "+e.getMessage());
+		}*/
+		
+		/*try {
+			ProductLocalServiceUtil.updateAsset(userId, product, assetCategoryIds, assetTagNames, assetLinkEntryIds, priority);
+			_log.info("NMEW SSET........."); 
+		} catch (PortalException e) {
+			_log.error("PortalException : "+e.getMessage());
+		}*/
+		
+		
+		AssetEntry assetEntry = null;
+		try {
+			_log.info("WESOMWE AssetEntry : ");
+			assetEntry = assetEntryLocalService.updateEntry(userId,
+			        groupId, product.getCreateDate(),
+			        product.getModifiedDate(), Product.class.getName(),
+			        productId, product.getUuid(), 0,
+			        serviceContext.getAssetCategoryIds(),
+			        serviceContext.getAssetTagNames(), true, true, null, null, null, null,
+			        ContentTypes.TEXT_HTML, product.getName(), product.getDescription(), product.getDescription(), null,
+			        null, 0, 0, null);
+			
+		} catch (PortalException e) {
+			_log.error("PortalException : "+e.getMessage());
 		}
+
+		try {
+			_log.info("WESOMWE assetLinkLocalService : ");
+			assetLinkLocalService.updateLinks(userId, assetEntry.getEntryId(),
+			        serviceContext.getAssetLinkEntryIds(),
+			        AssetLinkConstants.TYPE_RELATED);
+		} catch (PortalException e) {
+			_log.error("PortalException : "+e.getMessage());
+		}
+		
 		Indexer<Product> productIndexer = IndexerRegistryUtil.nullSafeGetIndexer(Product.class);
 		try {
 			_log.info("Indexing The Document Into Elstic Search");
 			productIndexer.reindex(product);
+			_log.info("Indexing DONE");
 		} catch (SearchException e) {
 			_log.error("SearchException : "+e.getMessage());
 		}
 		return product;
 	}
+	
+public Product updteProductMy(long productId,String name, String description,ServiceContext serviceContext) throws PortalException{
+		
+		Product product = ProductLocalServiceUtil.getProduct(productId);
+		long groupId = serviceContext.getScopeGroupId();
+		product.setGroupId(groupId);
+		product.setName(name);
+		product.setDescription(description);
+		product = ProductLocalServiceUtil.updateProduct(product);
+		
+		_log.info("addProduct..... product : "+product.toString());
+//		product = super.addProduct(product);
+
+		Double priority = serviceContext.getAssetPriority();
+		long[] assetCategoryIds = serviceContext.getAssetCategoryIds();
+		String[] assetTagNames = serviceContext.getAssetTagNames();
+		long[] assetLinkEntryIds = serviceContext.getAssetLinkEntryIds();
+		long userId = serviceContext.getUserId();
+		
+	/*	try {
+			updateAsset(userId, product, assetCategoryIds, assetTagNames, assetLinkEntryIds, priority);
+		} catch (PortalException e) {
+			_log.error("PortalException While Updting Asset Entry : "+e.getMessage());
+		}*/
+		/*
+		ProductLocalServiceUtil.updateAsset(userId, product, assetCategoryIds, assetTagNames, assetLinkEntryIds, priority);*/
+		
+		 AssetEntry assetEntry = assetEntryLocalService.updateEntry(product.getUserId(),
+				 product.getGroupId(), product.getCreateDate(),
+                 product.getModifiedDate(), Product.class.getName(),
+                 productId, product.getUuid(), 0,
+                 serviceContext.getAssetCategoryIds(),
+                 serviceContext.getAssetTagNames(), true, true, product.getCreateDate(), 
+                 null, null, null, ContentTypes.TEXT_HTML, product.getName(), product.getName(), null, 
+                 null, null, 0, 0, serviceContext.getAssetPriority());
+
+assetLinkLocalService.updateLinks(serviceContext.getUserId(),
+                 assetEntry.getEntryId(), serviceContext.getAssetLinkEntryIds(),
+                 AssetLinkConstants.TYPE_RELATED);
+
+		Indexer<Product> productIndexer = IndexerRegistryUtil.nullSafeGetIndexer(Product.class);
+		try {
+			_log.info("Re Indexing The Document Into Elstic Search");
+			productIndexer.reindex(product);
+			_log.info("Indexing DONE");
+		} catch (SearchException e) {
+			_log.error("SearchException : "+e.getMessage());
+		}
+		return product;
+	}
+
+@Override
+public Product deleteProduct(long productId) throws PortalException {
+	_log.info("deleteProduct WESES");
+	Product product = super.deleteProduct(productId);
+	AssetEntry assetEntry = assetEntryLocalService.fetchEntry(Product.class.getName(), productId);
+	assetLinkLocalService.deleteLinks(assetEntry.getEntryId());
+	assetEntryLocalService.deleteEntry(assetEntry);
+	return product;
+}
 	
 	@Override
 	public void updateAsset(
@@ -91,7 +191,7 @@ public class ProductLocalServiceImpl extends ProductLocalServiceBaseImpl {
 			String[] assetTagNames, long[] assetLinkEntryIds, Double priority)
 		throws PortalException {
 
-		boolean visible = false;
+		boolean visible = true;
 
 		/*if (product.isApproved()) {
 			visible = true;
@@ -100,11 +200,13 @@ public class ProductLocalServiceImpl extends ProductLocalServiceBaseImpl {
 		String summary = HtmlUtil.extractText(
 			StringUtil.shorten(product.getDescription(), 500));
 
+		Date publishDate = new Date();
+		long classTypeID = 0;
 		AssetEntry assetEntry = assetEntryLocalService.updateEntry(
 			userId, product.getGroupId(), product.getCreateDate(),
 			product.getModifiedDate(), Product.class.getName(),
-			product.getProductId(), product.getUuid(), 0, assetCategoryIds,
-			assetTagNames, true, visible, null, null, null, null,
+			product.getProductId(), product.getUuid(), classTypeID, assetCategoryIds,
+			assetTagNames, true, visible, null, null, publishDate , null,
 			ContentTypes.TEXT_HTML, product.getName(), product.getDescription(),
 			summary, null, null, 0, 0, priority);
 

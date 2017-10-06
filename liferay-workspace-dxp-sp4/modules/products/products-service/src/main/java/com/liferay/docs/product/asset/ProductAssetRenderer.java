@@ -1,4 +1,4 @@
-package com.liferaystack.products.web.asset;
+package com.liferay.docs.product.asset;
 
 import java.util.Locale;
 
@@ -77,7 +77,7 @@ public class ProductAssetRenderer extends BaseJSPAssetRenderer<Product>{
 	public int getAssetRendererType() {
 		// TODO Auto-generated method stub
 		return super.getAssetRendererType();
-	}*/
+	}*/ 
 	
 
 	private static Log _log = LogFactoryUtil.getLog(ProductAssetRenderer.class);

@@ -1,4 +1,4 @@
-package com.liferaystack.products.web.asset;
+package com.liferay.docs.product.asset;
 
 import javax.servlet.ServletContext;
 
