@@ -1,13 +1,5 @@
 package com.liferaystack.products.web.search;
 
-import java.util.Locale;
-
-import javax.portlet.PortletRequest;
-import javax.portlet.PortletResponse;
-
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
-
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.BaseIndexer;
@@ -15,9 +7,21 @@ import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.IndexWriterHelper;
 import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.Summary;
+import com.liferay.portal.kernel.search.filter.BooleanFilter;
+import com.liferay.portal.kernel.search.filter.Filter;
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferaystack.products.web.constants.ProductWebPortletKeys;
+
+import java.util.Locale;
+
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
+
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 import products.model.Product;
 import products.service.ProductLocalServiceUtil;
@@ -31,6 +35,36 @@ public class ProductIndexer extends BaseIndexer<Product> {
 
 	public static final String CLASS_NAME = Product.class.getName();
 	
+	public ProductIndexer() {
+	
+		setDefaultSelectedFieldNames(
+				Field.ASSET_TAG_NAMES, Field.COMPANY_ID, Field.CONTENT,
+				Field.ENTRY_CLASS_NAME, Field.ENTRY_CLASS_PK, Field.GROUP_ID,
+				Field.MODIFIED_DATE, Field.SCOPE_GROUP_ID, Field.TITLE, Field.UID);
+			setFilterSearch(true);
+			setPermissionAware(true);
+	}
+	
+	@Override
+	public boolean isVisible(long classPK, int status) throws Exception {
+		return true;
+	}
+	
+	@Override
+	public boolean hasPermission(
+			PermissionChecker permissionChecker, String entryClassName,
+			long entryClassPK, String actionId)
+		throws Exception {
+
+		return true;
+	}
+	
+	@Override
+	protected Filter addSearchClassTypeIds(BooleanFilter contextBooleanFilter, SearchContext searchContext)
+			throws Exception {
+		// TODO Auto-generated method stub
+		return super.addSearchClassTypeIds(contextBooleanFilter, searchContext);
+	}
 	@Override
 	public String getClassName() {
 		_log.info("getClassName");

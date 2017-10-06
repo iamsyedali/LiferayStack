@@ -15,10 +15,10 @@
 
 <%
 List<Product> products = ProductLocalServiceUtil.getProducts(-1,-1);
-System.out.println("size "+products.size());
+System.out.println("products : size "+products.size());
 %>
 
-<liferay-ui:search-container total="<%=products.size()%>" var="searchContainer" delta="1" deltaConfigurable="true" 
+<liferay-ui:search-container total="<%=products.size()%>" var="searchContainer" delta="10" deltaConfigurable="true" 
   emptyResultsMessage="Oops. There Are No Products To Display, Please add Products">
   
 	<liferay-ui:search-container-results results="<%=ListUtil.subList(products, searchContainer.getStart(),searchContainer.getEnd())%>" />
