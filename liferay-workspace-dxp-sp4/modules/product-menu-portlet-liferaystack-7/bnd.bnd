@@ -1,0 +1,4 @@
+Bundle-Name: product-menu-portlet-liferaystack-7
+Bundle-SymbolicName: com.liferaystack.admin.panel.app
+Bundle-Version: 1.0.0
+Export-Package: com.liferaystack.admin.panel.app.constants
