@@ -1,0 +1,4 @@
+Bundle-Name: custom-aui-validator-liferay-7
+Bundle-SymbolicName: com.liferaystack.custom.aui.validator
+Bundle-Version: 1.0.0
+Export-Package: com.liferaystack.custom.aui.validator.constants
