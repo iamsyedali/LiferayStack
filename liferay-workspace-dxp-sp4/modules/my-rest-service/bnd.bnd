@@ -1,0 +1,4 @@
+Bundle-Name: my-rest-service
+Bundle-SymbolicName: com.liferaystack
+Bundle-Version: 1.0.0
+Liferay-Configuration-Path: /configuration
